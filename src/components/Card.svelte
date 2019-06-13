@@ -60,12 +60,6 @@
   }
 </script>
 
-<style>
-  .card {
-    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.6);
-  }
-</style>
-
 <div class="w-full md:max-w-lg">
   <div
     class="pt-ar relative rounded-lg shadow"

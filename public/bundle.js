@@ -1193,7 +1193,7 @@ var app = (function () {
 
     const file = "src/components/Card.svelte";
 
-    // (85:8) {#if cardType}
+    // (79:8) {#if cardType}
     function create_if_block(ctx) {
     	var img, img_src_value;
 
@@ -1203,7 +1203,7 @@ var app = (function () {
     			img.src = img_src_value = ctx.cardTypes[ctx.cardType].icon;
     			img.alt = ctx.cardType;
     			img.className = "w-auto h-16";
-    			add_location(img, file, 85, 10, 2611);
+    			add_location(img, file, 79, 10, 2524);
     		},
 
     		m: function mount(target, anchor) {
@@ -1257,22 +1257,22 @@ var app = (function () {
     			set_style(img, "width", "32px");
     			set_style(img, "height", "32px");
     			img.alt = "Chip";
-    			add_location(img, file, 74, 6, 2175);
+    			add_location(img, file, 68, 6, 2088);
     			div0.className = "text-center text-2xl font-medium tracking-wide";
-    			add_location(div0, file, 78, 6, 2333);
+    			add_location(div0, file, 72, 6, 2246);
     			div1.className = "text-center";
-    			add_location(div1, file, 81, 6, 2434);
-    			add_location(div2, file, 83, 8, 2554);
+    			add_location(div1, file, 75, 6, 2347);
+    			add_location(div2, file, 77, 8, 2467);
     			div3.className = "flex justify-between items-center";
-    			add_location(div3, file, 82, 6, 2498);
+    			add_location(div3, file, 76, 6, 2411);
     			div4.className = "absolute inset-0 flex flex-col justify-between p-8";
-    			add_location(div4, file, 73, 4, 2104);
+    			add_location(div4, file, 67, 4, 2017);
     			div5.className = "pt-ar relative rounded-lg shadow";
     			set_style(div5, "background", (ctx.cardType ? ctx.cardTypes[ctx.cardType].background : 'white'));
     			set_style(div5, "color", (ctx.cardType ? ctx.cardTypes[ctx.cardType].color : '#444'));
-    			add_location(div5, file, 69, 2, 1910);
+    			add_location(div5, file, 63, 2, 1823);
     			div6.className = "w-full md:max-w-lg";
-    			add_location(div6, file, 68, 0, 1875);
+    			add_location(div6, file, 62, 0, 1788);
     		},
 
     		l: function claim(nodes) {
