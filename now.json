@@ -1,5 +1,11 @@
 {
   "version": 2,
   "name": "RetoCoderosJunio2019",
-  "builds": [{ "src": "package.json", "use": "@now/static-build" }]
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": { "distDir": "public" }
+    }
+  ]
 }
