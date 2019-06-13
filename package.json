@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "now-buid": "rollup -c",
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
     "start": "sirv public",
