@@ -10,7 +10,7 @@
   <div class="w-full sm:w-2/5 md:w-1/2 flex items-center mb-4 sm:mb-0">
     <Form />
   </div>
-  <div class="w-full sm:w-3/5 md:w-1/2 flex items-center">
-    <Card />
-  </div>
+  <!-- <div class="w-full sm:w-3/5 md:w-1/2 flex items-center"> -->
+  <Card />
+  <!-- </div> -->
 </div>

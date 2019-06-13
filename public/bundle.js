@@ -1,2 +1,1874 @@
-var app=function(){"use strict";function e(){}function t(e){return e()}function n(){return Object.create(null)}function r(e){e.forEach(t)}function a(e){return"function"==typeof e}function o(e,t){return e!=e?t==t:e!==t||e&&"object"==typeof e||"function"==typeof e}function l(e,t,n){const r=t.subscribe(n);e.$$.on_destroy.push(r.unsubscribe?()=>r.unsubscribe():r)}function c(e,t){e.appendChild(t)}function i(e,t,n){e.insertBefore(t,n||null)}function u(e){e.parentNode.removeChild(e)}function s(e){return document.createElement(e)}function d(e){return document.createTextNode(e)}function f(){return d(" ")}function h(e,t,n,r){return e.addEventListener(t,n,r),()=>e.removeEventListener(t,n,r)}function p(e,t,n){null==n?e.removeAttribute(t):e.setAttribute(t,n)}function g(e,t){t=""+t,e.data!==t&&(e.data=t)}function m(e,t,n){e.style.setProperty(t,n)}let v;function y(e){v=e}const $=[],b=Promise.resolve();let x=!1;const C=[],w=[],_=[];function N(e){w.push(e)}function E(){const e=new Set;do{for(;$.length;){const e=$.shift();y(e),T(e.$$)}for(;C.length;)C.shift()();for(;w.length;){const t=w.pop();e.has(t)||(t(),e.add(t))}}while($.length);for(;_.length;)_.pop()();x=!1}function T(e){e.fragment&&(e.update(e.dirty),r(e.before_render),e.fragment.p(e.dirty,e.ctx),e.dirty=null,e.after_render.forEach(N))}function D(e,n,o){const{fragment:l,on_mount:c,on_destroy:i,after_render:u}=e.$$;l.m(n,o),N(()=>{const n=c.map(t).filter(a);i?i.push(...n):r(n),e.$$.on_mount=[]}),u.forEach(N)}function k(e,t){e.$$.dirty||($.push(e),x||(x=!0,b.then(E)),e.$$.dirty=n()),e.$$.dirty[t]=!0}function L(t,a,o,l,c,i){const u=v;y(t);const s=a.props||{},d=t.$$={fragment:null,ctx:null,props:i,update:e,not_equal:c,bound:n(),on_mount:[],on_destroy:[],before_render:[],after_render:[],context:new Map(u?u.$$.context:[]),callbacks:n(),dirty:null};let f=!1;var h;d.ctx=o?o(t,s,(e,n)=>{d.ctx&&c(d.ctx[e],d.ctx[e]=n)&&(d.bound[e]&&d.bound[e](n),f&&k(t,e))}):s,d.update(),f=!0,r(d.before_render),d.fragment=l(d.ctx),a.target&&(a.hydrate?d.fragment.l((h=a.target,Array.from(h.childNodes))):d.fragment.c(),a.intro&&t.$$.fragment.i&&t.$$.fragment.i(),D(t,a.target,a.anchor),E()),y(u)}class V{$destroy(){var t,n;n=!0,(t=this).$$&&(r(t.$$.on_destroy),t.$$.fragment.d(n),t.$$.on_destroy=t.$$.fragment=null,t.$$.ctx={}),this.$destroy=e}$on(e,t){const n=this.$$.callbacks[e]||(this.$$.callbacks[e]=[]);return n.push(t),()=>{const e=n.indexOf(t);-1!==e&&n.splice(e,1)}}$set(){}}function M(t,n=e){let r;const a=[];function l(e){if(o(t,e)){if(t=e,!r)return;a.forEach(e=>e[1]()),a.forEach(e=>e[0](t))}}return{set:l,update:function(e){l(e(t))},subscribe:function(o,c=e){const i=[o,c];return a.push(i),1===a.length&&(r=n(l)||e),o(t),()=>{const e=a.indexOf(i);-1!==e&&a.splice(e,1),0===a.length&&r()}}}}const S=M("4915666431345739"),j=M("Juan Fernando"),A=M("04"),F=M("20"),z=M("434"),H=M(!1);var O="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{};function I(e,t){return e(t={exports:{}},t.exports),t.exports}var J=I(function(e){(function(){var t,n,r;(t=function(e){return t.isDOMElement(e)?e:document.querySelectorAll(e)}).isDOMElement=function(e){return e&&null!=e.nodeName},r=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,t.trim=function(e){return null===e?"":(e+"").replace(r,"")},n=/\r/g,t.val=function(e,t){var r;return arguments.length>1?e.value=t:"string"==typeof(r=e.value)?r.replace(n,""):null===r?"":r},t.preventDefault=function(e){if("function"!=typeof e.preventDefault)return e.returnValue=!1,!1;e.preventDefault()},t.normalizeEvent=function(e){var n;return null==(e={which:null!=(n=e).which?n.which:void 0,target:n.target||n.srcElement,preventDefault:function(){return t.preventDefault(n)},originalEvent:n,data:n.data||n.detail}).which&&(e.which=null!=n.charCode?n.charCode:n.keyCode),e},t.on=function(e,n,r){var a,o,l,c,i,u,s,d;if(e.length)for(o=0,c=e.length;o<c;o++)a=e[o],t.on(a,n,r);else{if(!n.match(" "))return s=r,r=function(e){return e=t.normalizeEvent(e),s(e)},e.addEventListener?e.addEventListener(n,r,!1):e.attachEvent?(n="on"+n,e.attachEvent(n,r)):void(e["on"+n]=r);for(l=0,i=(d=n.split(" ")).length;l<i;l++)u=d[l],t.on(e,u,r)}},t.addClass=function(e,n){var r;return e.length?function(){var a,o,l;for(l=[],a=0,o=e.length;a<o;a++)r=e[a],l.push(t.addClass(r,n));return l}():e.classList?e.classList.add(n):e.className+=" "+n},t.hasClass=function(e,n){var r,a,o,l;if(e.length){for(a=!0,o=0,l=e.length;o<l;o++)r=e[o],a=a&&t.hasClass(r,n);return a}return e.classList?e.classList.contains(n):new RegExp("(^| )"+n+"( |$)","gi").test(e.className)},t.removeClass=function(e,n){var r,a,o,l,c,i;if(e.length)return function(){var r,o,l;for(l=[],r=0,o=e.length;r<o;r++)a=e[r],l.push(t.removeClass(a,n));return l}();if(e.classList){for(i=[],o=0,l=(c=n.split(" ")).length;o<l;o++)r=c[o],i.push(e.classList.remove(r));return i}return e.className=e.className.replace(new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi")," ")},t.toggleClass=function(e,n,r){var a;return e.length?function(){var o,l,c;for(c=[],o=0,l=e.length;o<l;o++)a=e[o],c.push(t.toggleClass(a,n,r));return c}():r?t.hasClass(e,n)?void 0:t.addClass(e,n):t.removeClass(e,n)},t.append=function(e,n){var r;return e.length?function(){var a,o,l;for(l=[],a=0,o=e.length;a<o;a++)r=e[a],l.push(t.append(r,n));return l}():e.insertAdjacentHTML("beforeend",n)},t.find=function(e,t){return(e instanceof NodeList||e instanceof Array)&&(e=e[0]),e.querySelectorAll(t)},t.trigger=function(e,t,n){var r;try{r=new CustomEvent(t,{detail:n})}catch(e){(r=document.createEvent("CustomEvent")).initCustomEvent?r.initCustomEvent(t,!0,!0,n):r.initEvent(t,!0,!0,n)}return e.dispatchEvent(r)},e.exports=t}).call(O)}),Y=I(function(e){(function(){var t,n,r,a,o,l,c,i,u,s,d,f,h,p,g,m,v,y,$,b,x,C,w,_,N=[].indexOf||function(e){for(var t=0,n=this.length;t<n;t++)if(t in this&&this[t]===e)return t;return-1};n=J,o=[{type:"amex",pattern:/^3[47]/,format:/(\d{1,4})(\d{1,6})?(\d{1,5})?/,length:[15],cvcLength:[4],luhn:!0},{type:"dankort",pattern:/^5019/,format:l=/(\d{1,4})/g,length:[16],cvcLength:[3],luhn:!0},{type:"hipercard",pattern:/^(384100|384140|384160|606282|637095|637568|60(?!11))/,format:l,length:[14,15,16,17,18,19],cvcLength:[3],luhn:!0},{type:"dinersclub",pattern:/^(36|38|30[0-5])/,format:/(\d{1,4})(\d{1,6})?(\d{1,4})?/,length:[14],cvcLength:[3],luhn:!0},{type:"discover",pattern:/^(6011|65|64[4-9]|622)/,format:l,length:[16],cvcLength:[3],luhn:!0},{type:"jcb",pattern:/^35/,format:l,length:[16],cvcLength:[3],luhn:!0},{type:"laser",pattern:/^(6706|6771|6709)/,format:l,length:[16,17,18,19],cvcLength:[3],luhn:!0},{type:"maestro",pattern:/^(5018|5020|5038|6304|6703|6708|6759|676[1-3])/,format:l,length:[12,13,14,15,16,17,18,19],cvcLength:[3],luhn:!0},{type:"mastercard",pattern:/^(5[1-5]|677189)|^(222[1-9]|2[3-6]\d{2}|27[0-1]\d|2720)/,format:l,length:[16],cvcLength:[3],luhn:!0},{type:"unionpay",pattern:/^62/,format:l,length:[16,17,18,19],cvcLength:[3],luhn:!1},{type:"visaelectron",pattern:/^4(026|17500|405|508|844|91[37])/,format:l,length:[16],cvcLength:[3],luhn:!0},{type:"elo",pattern:/^(4011(78|79)|43(1274|8935)|45(1416|7393|763(1|2))|50(4175|6699|67[0-7][0-9]|9000)|627780|63(6297|6368)|650(03([^4])|04([0-9])|05(0|1)|4(0[5-9]|3[0-9]|8[5-9]|9[0-9])|5([0-2][0-9]|3[0-8])|9([2-6][0-9]|7[0-8])|541|700|720|901)|651652|655000|655021)/,format:l,length:[16],cvcLength:[3],luhn:!0},{type:"visa",pattern:/^4/,format:l,length:[13,16,19],cvcLength:[3],luhn:!0}],r=function(e){var t,n,r;for(e=(e+"").replace(/\D/g,""),n=0,r=o.length;n<r;n++)if((t=o[n]).pattern.test(e))return t},a=function(e){var t,n,r;for(n=0,r=o.length;n<r;n++)if((t=o[n]).type===e)return t},g=function(e){var t,n,r,a,o,l;for(o=!0,l=0,r=0,a=(n=(e+"").split("").reverse()).length;r<a;r++)t=n[r],t=parseInt(t,10),(o=!o)&&(t*=2),t>9&&(t-=9),l+=t;return l%10==0},p=function(e){var t;try{if(null!=e.selectionStart&&e.selectionStart!==e.selectionEnd)return!0;if(null!=("undefined"!=typeof document&&null!==document&&null!=(t=document.selection)?t.createRange:void 0)&&document.selection.createRange().text)return!0}catch(e){}return!1},m=function(e){return setTimeout(function(){var r,a;return r=e.target,a=n.val(r),a=t.fns.formatCardNumber(a),n.val(r,a),n.trigger(r,"change")})},u=function(e){return function(t){var a,o,l,c,i,u,s,d,f,h;if(o=String.fromCharCode(t.which),/^\d+$/.test(o)){for(s=t.target,h=n.val(s),a=r(h+o),u=(h.replace(/\D/g,"")+o).length,f=[16],a&&(f=a.length),e&&(f=f.filter(function(t){return t<=e})),l=c=0,i=f.length;c<i;l=++c)if(!(u>=(d=f[l])&&f[l+1])&&u>=d)return;if(!p(s))return(a&&"amex"===a.type?/^(\d{4}|\d{4}\s\d{6})$/:/(?:^|\s)(\d{4})$/).test(h)?(t.preventDefault(),n.val(s,h+" "+o),n.trigger(s,"change")):void 0}}},c=function(e){var t,r;if(t=e.target,r=n.val(t),!e.meta&&8===e.which&&!p(t))return/\d\s$/.test(r)?(e.preventDefault(),n.val(t,r.replace(/\d\s$/,"")),n.trigger(t,"change")):/\s\d?$/.test(r)?(e.preventDefault(),n.val(t,r.replace(/\s\d?$/,"")),n.trigger(t,"change")):void 0},s=function(e){var t,r,a;if(t=String.fromCharCode(e.which),/^\d+$/.test(t))return r=e.target,a=n.val(r)+t,/^\d$/.test(a)&&"0"!==a&&"1"!==a?(e.preventDefault(),n.val(r,"0"+a+" / "),n.trigger(r,"change")):/^\d\d$/.test(a)?(e.preventDefault(),n.val(r,a+" / "),n.trigger(r,"change")):void 0},h=function(e){var t,r,a;if(t=String.fromCharCode(e.which),/^\d+$/.test(t))return r=e.target,a=n.val(r)+t,/^\d$/.test(a)&&"0"!==a&&"1"!==a?(e.preventDefault(),n.val(r,"0"+a),n.trigger(r,"change")):/^\d\d$/.test(a)?(e.preventDefault(),n.val(r,""+a),n.trigger(r,"change")):void 0},d=function(e){var t,r,a;if(t=String.fromCharCode(e.which),/^\d+$/.test(t))return r=e.target,a=n.val(r),/^\d\d$/.test(a)?(n.val(r,a+" / "),n.trigger(r,"change")):void 0},f=function(e){var t,r;if("/"===String.fromCharCode(e.which))return t=e.target,r=n.val(t),/^\d$/.test(r)&&"0"!==r?(n.val(t,"0"+r+" / "),n.trigger(t,"change")):void 0},i=function(e){var t,r;if(!e.metaKey&&(t=e.target,r=n.val(t),8===e.which&&!p(t)))return/\d(\s|\/)+$/.test(r)?(e.preventDefault(),n.val(t,r.replace(/\d(\s|\/)*$/,"")),n.trigger(t,"change")):/\s\/\s?\d?$/.test(r)?(e.preventDefault(),n.val(t,r.replace(/\s\/\s?\d?$/,"")),n.trigger(t,"change")):void 0},C=function(e){var t;return!(!e.metaKey&&!e.ctrlKey)||(32===e.which?e.preventDefault():0===e.which||(e.which<33||(t=String.fromCharCode(e.which),/[\d\s]/.test(t)?void 0:e.preventDefault())))},y=function(e){return function(t){var a,o,l,c,i;if(c=t.target,o=String.fromCharCode(t.which),/^\d+$/.test(o)&&!p(c))return i=(n.val(c)+o).replace(/\D/g,""),l=16,(a=r(i))&&(l=a.length[a.length.length-1]),e&&(l=Math.min(l,e)),i.length<=l?void 0:t.preventDefault()}},b=function(e,t){var r,a;if(a=e.target,r=String.fromCharCode(e.which),/^\d+$/.test(r)&&!p(a))return(n.val(a)+r).replace(/\D/g,"").length>t?e.preventDefault():void 0},$=function(e){return b(e,6)},x=function(e){return b(e,2)},w=function(e){return b(e,4)},v=function(e){var t,r;if(r=e.target,t=String.fromCharCode(e.which),/^\d+$/.test(t)&&!p(r))return(n.val(r)+t).length<=4?void 0:e.preventDefault()},_=function(e){var r,a,l,c,i;if(c=e.target,i=n.val(c),l=t.fns.cardType(i)||"unknown",!n.hasClass(c,l))return r=function(){var e,t,n;for(n=[],e=0,t=o.length;e<t;e++)a=o[e],n.push(a.type);return n}(),n.removeClass(c,"unknown"),n.removeClass(c,r.join(" ")),n.addClass(c,l),n.toggleClass(c,"identified","unknown"!==l),n.trigger(c,"payment.cardType",l)},t=function(){function e(){}return e.fns={cardExpiryVal:function(e){var t,n,r;return t=(n=(e=e.replace(/\s/g,"")).split("/",2))[0],2===(null!=(r=n[1])?r.length:void 0)&&/^\d+$/.test(r)&&(r=(new Date).getFullYear().toString().slice(0,2)+r),{month:t=parseInt(t,10),year:r=parseInt(r,10)}},validateCardNumber:function(e){var t,n;return e=(e+"").replace(/\s+|-/g,""),!!/^\d+$/.test(e)&&(!!(t=r(e))&&(n=e.length,N.call(t.length,n)>=0&&(!1===t.luhn||g(e))))},validateCardExpiry:function(t,r){var a,o,l,c;return"object"==typeof t&&"month"in t?(t=(l=t).month,r=l.year):"string"==typeof t&&N.call(t,"/")>=0&&(t=(c=e.fns.cardExpiryVal(t)).month,r=c.year),!(!t||!r)&&(t=n.trim(t),r=n.trim(r),!!/^\d+$/.test(t)&&(!!/^\d+$/.test(r)&&(!!((t=parseInt(t,10))&&t<=12)&&(2===r.length&&(r=(new Date).getFullYear().toString().slice(0,2)+r),o=new Date(r,t),a=new Date,o.setMonth(o.getMonth()-1),o.setMonth(o.getMonth()+1,1),o>a))))},validateCardCVC:function(e,t){var r,o;return e=n.trim(e),!!/^\d+$/.test(e)&&(t&&a(t)?(r=e.length,N.call(null!=(o=a(t))?o.cvcLength:void 0,r)>=0):e.length>=3&&e.length<=4)},cardType:function(e){var t;return e&&(null!=(t=r(e))?t.type:void 0)||null},formatCardNumber:function(e){var t,n,a,o;return(t=r(e))?(o=t.length[t.length.length-1],e=(e=e.replace(/\D/g,"")).slice(0,o),t.format.global?null!=(a=e.match(t.format))?a.join(" "):void 0:null!=(n=t.format.exec(e))?(n.shift(),(n=n.filter(function(e){return e})).join(" ")):void 0):e}},e.restrictNumeric=function(e){return n.on(e,"keypress",C)},e.cardExpiryVal=function(t){return e.fns.cardExpiryVal(n.val(t))},e.formatCardCVC=function(t){return e.restrictNumeric(t),n.on(t,"keypress",v),t},e.formatCardExpiry=function(t){var r,a;return e.restrictNumeric(t),t.length&&2===t.length?(r=t[0],a=t[1],this.formatCardExpiryMultiple(r,a)):(n.on(t,"keypress",$),n.on(t,"keypress",s),n.on(t,"keypress",f),n.on(t,"keypress",d),n.on(t,"keydown",i)),t},e.formatCardExpiryMultiple=function(e,t){return n.on(e,"keypress",x),n.on(e,"keypress",h),n.on(t,"keypress",w)},e.formatCardNumber=function(t,r){return e.restrictNumeric(t),n.on(t,"keypress",y(r)),n.on(t,"keypress",u(r)),n.on(t,"keydown",c),n.on(t,"keyup blur",_),n.on(t,"paste",m),n.on(t,"input",m),t},e.getCardArray=function(){return o},e.setCardArray=function(e){return o=e,!0},e.addToCardArray=function(e){return o.push(e)},e.removeFromCardArray=function(e){var t;for(t in o)o[t].type===e&&o.splice(t,1);return!0},e}(),e.exports=t,O.Payment=t}).call(O)});function P(e){var t,n;return{c(){(t=s("img")).src=n=e.cardTypes[e.cardType].icon,t.alt=e.cardType,t.className="w-auto h-16"},m(e,n){i(e,t,n)},p(e,r){e.cardType&&n!==(n=r.cardTypes[r.cardType].icon)&&(t.src=n),e.cardType&&(t.alt=r.cardType)},d(e){e&&u(t)}}}function R(t){var n,r,a,o,l,h,p,v,y,$,b,x,C,w,_,N,E,T=t.cardType&&P(t);return{c(){n=s("div"),r=s("div"),a=s("div"),o=s("img"),l=f(),h=s("div"),p=d(t.store_num),v=f(),y=s("div"),$=d(t.store_month),b=d("/"),x=d(t.store_year),C=f(),w=s("div"),_=s("div"),N=d(t.store_name),E=f(),T&&T.c(),o.src="https://cdn0.iconfinder.com/data/icons/fatcow/32/card_chip_gold.png",m(o,"width","32px"),m(o,"height","32px"),o.alt="Chip",h.className="text-center text-2xl font-medium tracking-wide",y.className="text-center",w.className="flex justify-between items-center",a.className="absolute inset-0 flex flex-col justify-between p-8",r.className="pt-ar relative rounded-lg shadow",m(r,"background",t.cardType?t.cardTypes[t.cardType].background:"white"),m(r,"color",t.cardType?t.cardTypes[t.cardType].color:"#444"),n.className="w-full md:max-w-lg"},m(e,t){i(e,n,t),c(n,r),c(r,a),c(a,o),c(a,l),c(a,h),c(h,p),c(a,v),c(a,y),c(y,$),c(y,b),c(y,x),c(a,C),c(a,w),c(w,_),c(_,N),c(w,E),T&&T.m(w,null)},p(e,t){e.store_num&&g(p,t.store_num),e.store_month&&g($,t.store_month),e.store_year&&g(x,t.store_year),e.store_name&&g(N,t.store_name),t.cardType?T?T.p(e,t):((T=P(t)).c(),T.m(w,null)):T&&(T.d(1),T=null),(e.cardType||e.cardTypes)&&(m(r,"background",t.cardType?t.cardTypes[t.cardType].background:"white"),m(r,"color",t.cardType?t.cardTypes[t.cardType].color:"#444"))},i:e,o:e,d(e){e&&u(n),T&&T.d()}}}function q(e,t,n){let r,a,o,l,c,i;S.subscribe(e=>{n("store_num",r=e)}),j.subscribe(e=>{n("store_name",a=e)}),A.subscribe(e=>{n("store_month",o=e)}),F.subscribe(e=>{n("store_year",l=e)}),z.subscribe(e=>{n("store_ccv",c=e)});let u=!1,s=!1,d=!1;return e.$$.update=((e={store_num:1,store_ccv:1,store_month:1,store_year:1,isNumberValid:1,isCcvValid:1,isDateValid:1})=>{(e.store_num||e.store_ccv||e.store_month||e.store_year||e.isNumberValid||e.isCcvValid||e.isDateValid)&&(n("cardType",i=Y.fns.cardType(r)),n("isNumberValid",u=Y.fns.validateCardNumber(r)),n("isCcvValid",d=Y.fns.validateCardCVC(c)),n("isDateValid",s=Y.fns.validateCardExpiry(o,l)),console.log(r,o,l,c),console.log(u,d,s),H.set(u&&d&&s))}),{store_num:r,store_name:a,store_month:o,store_year:l,cardType:i,cardTypes:{visa:{background:"linear-gradient(28deg, rgba(26,55,113,1) 0%, rgba(81,110,153,1) 50%, rgba(26,50,113,1) 100%)",color:"#c4dcff",icon:"https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-08-512.png"},mastercard:{color:"#fff0db",background:"linear-gradient(0deg, rgba(105,83,57,1) 0%, rgba(231,184,116,1) 100%)",icon:"https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-07-512.png"},amex:{background:"linear-gradient(0deg, rgba(145,158,164,1) 0%, rgba(215,224,228,1) 100%)",color:"#3e535e",icon:"https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-05-512.png"}}}}class B extends V{constructor(e){super(),L(this,e,q,R,o,[])}}function K(e){var t;return{c(){(t=s("button")).textContent="Button",t.className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-full mt-6\n      rounded"},m(e,n){i(e,t,n)},d(e){e&&u(t)}}}function G(t){var n,a,o,l,d,g,m,v,y,$,b,x,C,w,_,N,E,T,D,k,L,V,M,S=t.isValidCC&&K();return{c(){n=s("div"),(a=s("div")).innerHTML='<div class="w-1/4 border-2 border-indigo-400 px-2 py-2 rounded-full font-bold\n\t\t\t      mr-2"><svg class="w-full fill-current text-indigo-400" viewBox="0 0 500 500"><path d="M272.715,286.341H145.518c-12.538,0-22.715,10.179-22.715,22.715\n\t\t\t          s10.177,22.716,22.715,22.716h127.197c12.537,0,22.712-10.18,22.712-22.716S285.252,286.341,272.715,286.341z\n\t\t\t          M31.949,386.284\n\t\t\t          c0,20.079,16.264,36.34,36.34,36.34h363.421c20.078,0,36.34-16.261,36.34-36.34V113.718c0-20.079-16.262-36.343-36.34-36.343H68.29\n\t\t\t          c-20.077,0-36.34,16.264-36.34,36.343V386.284z\n\t\t\t          M97.367,122.802h305.267c11.084,0,19.99,8.909,19.99,19.991v25.438H77.375v-25.438\n\t\t\t          C77.375,131.711,86.28,122.802,97.367,122.802z\n\t\t\t          M77.375,240.914h345.249v116.292c0,11.081-8.906,19.992-19.99,19.992H97.367\n\t\t\t          c-11.086,0-19.991-8.911-19.991-19.992V240.914z"></path></svg></div>\n\t\t\t    <h2 class="text-lg font-medium text-gray-800">Your Payment Information</h2>',o=f(),l=s("div"),(d=s("label")).textContent="Name on card",g=f(),m=s("input"),v=f(),y=s("div"),($=s("label")).textContent="Credit Card info",b=f(),x=s("div"),C=s("div"),w=s("input"),_=f(),N=s("div"),E=s("input"),T=f(),D=s("input"),k=f(),L=s("input"),V=f(),S&&S.c(),a.className="flex items-center mb-4",d.htmlFor="payment",d.className="block text text-gray-700 mb-2",p(m,"type","text"),m.className="w-full flex-1 text-sm bg-gray-200 text-gray-700 rounded p-3\n      focus:outline-none",m.placeholder="John Doe",l.className="mb-4",$.htmlFor="payment",$.className="block text text-gray-700 mb-2",p(w,"type","text"),w.className="w-full flex-1 text-sm bg-gray-200 text-gray-700 pl-3 py-3\n          focus:outline-none rounded-l sm:rounded-b-none sm:rounded-t\n          lg:rounded-r-none lg:rounded-l",w.placeholder="Card Number",w.maxLength="16",C.className="flex w-1/2 sm:block sm:w-full",p(E,"type","text"),E.className="w-1/3 block text-sm bg-gray-200 text-gray-700 py-3\n          focus:outline-none sm:pl-3 sm:rounded-bl lg:rounded-none",E.placeholder="MM",p(D,"type","text"),D.className="w-1/3 block text-sm bg-gray-200 text-gray-700 py-3\n          focus:outline-none",D.placeholder="YY",p(L,"type","text"),L.className="w-1/3 block text-sm bg-gray-200 text-gray-700 py-3 pr-y\n          focus:outline-none rounded-r sm:rounded-br sm:rounded-tr-none\n          lg:rounded-r",L.placeholder="CCV",N.className="flex w-full lg:w-1/2",x.className="flex flex-row sm:flex-col lg:flex-row",n.className="bg-white shadow p-8 rounded-lg",M=[h(m,"input",t.input0_input_handler),h(w,"input",t.input1_input_handler),h(E,"input",t.input2_input_handler),h(D,"input",t.input3_input_handler),h(L,"input",t.input4_input_handler)]},m(e,r){i(e,n,r),c(n,a),c(n,o),c(n,l),c(l,d),c(l,g),c(l,m),m.value=t.$name,c(n,v),c(n,y),c(y,$),c(y,b),c(y,x),c(x,C),c(C,w),w.value=t.$num,c(x,_),c(x,N),c(N,E),E.value=t.$month,c(N,T),c(N,D),D.value=t.$year,c(N,k),c(N,L),L.value=t.$ccv,c(n,V),S&&S.m(n,null)},p(e,t){e.$name&&m.value!==t.$name&&(m.value=t.$name),e.$num&&w.value!==t.$num&&(w.value=t.$num),e.$month&&E.value!==t.$month&&(E.value=t.$month),e.$year&&D.value!==t.$year&&(D.value=t.$year),e.$ccv&&L.value!==t.$ccv&&(L.value=t.$ccv),t.isValidCC?S||((S=K()).c(),S.m(n,null)):S&&(S.d(1),S=null)},i:e,o:e,d(e){e&&u(n),S&&S.d(),r(M)}}}function Q(e,t,n){let r,a,o,c,i,u;return l(e,j,e=>{n("$name",r=e)}),l(e,S,e=>{n("$num",a=e)}),l(e,A,e=>{n("$month",o=e)}),l(e,F,e=>{n("$year",c=e)}),l(e,z,e=>{n("$ccv",i=e)}),H.subscribe(e=>{n("isValidCC",u=e)}),{isValidCC:u,$name:r,$num:a,$month:o,$year:c,$ccv:i,input0_input_handler:function(){j.set(this.value)},input1_input_handler:function(){S.set(this.value)},input2_input_handler:function(){A.set(this.value)},input3_input_handler:function(){F.set(this.value)},input4_input_handler:function(){z.set(this.value)}}}class U extends V{constructor(e){super(),L(this,e,Q,G,o,[])}}function W(t){var n,r,a,o,l,d=new U({}),h=new B({});return{c(){n=s("div"),r=s("div"),d.$$.fragment.c(),a=f(),o=s("div"),h.$$.fragment.c(),r.className="w-full sm:w-2/5 md:w-1/2 flex items-center mb-4 sm:mb-0",o.className="w-full sm:w-3/5 md:w-1/2 flex items-center",n.className="sm:bg-red-400 md:bg-blue-400 lg:bg-green-400 xl:bg-indigo-400 flex\n  justify-center h-screen flex-col sm:flex-row px-3"},m(e,t){i(e,n,t),c(n,r),D(d,r,null),c(n,a),c(n,o),D(h,o,null),l=!0},p:e,i(e){l||(d.$$.fragment.i(e),h.$$.fragment.i(e),l=!0)},o(e){d.$$.fragment.o(e),h.$$.fragment.o(e),l=!1},d(e){e&&u(n),d.$destroy(),h.$destroy()}}}return new class extends V{constructor(e){super(),L(this,e,null,W,o,[])}}({target:document.body})}();
+
+(function(l, i, v, e) { v = l.createElement(i); v.async = 1; v.src = '//' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; e = l.getElementsByTagName(i)[0]; e.parentNode.insertBefore(v, e)})(document, 'script');
+var app = (function () {
+    'use strict';
+
+    function noop() { }
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function validate_store(store, name) {
+        if (!store || typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(component, store, callback) {
+        const unsub = store.subscribe(callback);
+        component.$$.on_destroy.push(unsub.unsubscribe
+            ? () => unsub.unsubscribe()
+            : unsub);
+    }
+
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function svg_element(name) {
+        return document.createElementNS('http://www.w3.org/2000/svg', name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else
+            node.setAttribute(attribute, value);
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function set_data(text, data) {
+        data = '' + data;
+        if (text.data !== data)
+            text.data = data;
+    }
+    function set_style(node, key, value) {
+        node.style.setProperty(key, value);
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+
+    const dirty_components = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    function flush() {
+        const seen_callbacks = new Set();
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            while (dirty_components.length) {
+                const component = dirty_components.shift();
+                set_current_component(component);
+                update(component.$$);
+            }
+            while (binding_callbacks.length)
+                binding_callbacks.shift()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            while (render_callbacks.length) {
+                const callback = render_callbacks.pop();
+                if (!seen_callbacks.has(callback)) {
+                    callback();
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                }
+            }
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+    }
+    function update($$) {
+        if ($$.fragment) {
+            $$.update($$.dirty);
+            run_all($$.before_render);
+            $$.fragment.p($$.dirty, $$.ctx);
+            $$.dirty = null;
+            $$.after_render.forEach(add_render_callback);
+        }
+    }
+    function mount_component(component, target, anchor) {
+        const { fragment, on_mount, on_destroy, after_render } = component.$$;
+        fragment.m(target, anchor);
+        // onMount happens after the initial afterUpdate. Because
+        // afterUpdate callbacks happen in reverse order (inner first)
+        // we schedule onMount callbacks before afterUpdate callbacks
+        add_render_callback(() => {
+            const new_on_destroy = on_mount.map(run).filter(is_function);
+            if (on_destroy) {
+                on_destroy.push(...new_on_destroy);
+            }
+            else {
+                // Edge case - component was destroyed immediately,
+                // most likely as a result of a binding initialising
+                run_all(new_on_destroy);
+            }
+            component.$$.on_mount = [];
+        });
+        after_render.forEach(add_render_callback);
+    }
+    function destroy(component, detaching) {
+        if (component.$$) {
+            run_all(component.$$.on_destroy);
+            component.$$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            component.$$.on_destroy = component.$$.fragment = null;
+            component.$$.ctx = {};
+        }
+    }
+    function make_dirty(component, key) {
+        if (!component.$$.dirty) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty = blank_object();
+        }
+        component.$$.dirty[key] = true;
+    }
+    function init(component, options, instance, create_fragment, not_equal$$1, prop_names) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const props = options.props || {};
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props: prop_names,
+            update: noop,
+            not_equal: not_equal$$1,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            before_render: [],
+            after_render: [],
+            context: new Map(parent_component ? parent_component.$$.context : []),
+            // everything else
+            callbacks: blank_object(),
+            dirty: null
+        };
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, props, (key, value) => {
+                if ($$.ctx && not_equal$$1($$.ctx[key], $$.ctx[key] = value)) {
+                    if ($$.bound[key])
+                        $$.bound[key](value);
+                    if (ready)
+                        make_dirty(component, key);
+                }
+            })
+            : props;
+        $$.update();
+        ready = true;
+        run_all($$.before_render);
+        $$.fragment = create_fragment($$.ctx);
+        if (options.target) {
+            if (options.hydrate) {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment.l(children(options.target));
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment.c();
+            }
+            if (options.intro && component.$$.fragment.i)
+                component.$$.fragment.i();
+            mount_component(component, options.target, options.anchor);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    class SvelteComponent {
+        $destroy() {
+            destroy(this, true);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set() {
+            // overridden by instance, if it has props
+        }
+    }
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error(`'target' is a required option`);
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+            };
+        }
+    }
+
+    /**
+     * Creates a `Readable` store that allows reading by subscription.
+     * @param value initial value
+     * @param {StartStopNotifier}start start and stop notifications for subscriptions
+     */
+    function readable(value, start) {
+        return {
+            subscribe: writable(value, start).subscribe,
+        };
+    }
+    /**
+     * Create a `Writable` store that allows both updating and reading by subscription.
+     * @param {*=}value initial value
+     * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+     */
+    function writable(value, start = noop) {
+        let stop;
+        const subscribers = [];
+        function set(new_value) {
+            if (safe_not_equal(value, new_value)) {
+                value = new_value;
+                if (!stop) {
+                    return; // not ready
+                }
+                subscribers.forEach((s) => s[1]());
+                subscribers.forEach((s) => s[0](value));
+            }
+        }
+        function update(fn) {
+            set(fn(value));
+        }
+        function subscribe(run, invalidate = noop) {
+            const subscriber = [run, invalidate];
+            subscribers.push(subscriber);
+            if (subscribers.length === 1) {
+                stop = start(set) || noop;
+            }
+            run(value);
+            return () => {
+                const index = subscribers.indexOf(subscriber);
+                if (index !== -1) {
+                    subscribers.splice(index, 1);
+                }
+                if (subscribers.length === 0) {
+                    stop();
+                }
+            };
+        }
+        return { set, update, subscribe };
+    }
+    /**
+     * Derived value store by synchronizing one or more readable stores and
+     * applying an aggregation function over its input values.
+     * @param {Stores} stores input stores
+     * @param {function(Stores=, function(*)=):*}fn function callback that aggregates the values
+     * @param {*=}initial_value when used asynchronously
+     */
+    function derived(stores, fn, initial_value) {
+        const single = !Array.isArray(stores);
+        const stores_array = single
+            ? [stores]
+            : stores;
+        const auto = fn.length < 2;
+        const invalidators = [];
+        const store = readable(initial_value, (set) => {
+            let inited = false;
+            const values = [];
+            let pending = 0;
+            let cleanup = noop;
+            const sync = () => {
+                if (pending) {
+                    return;
+                }
+                cleanup();
+                const result = fn(single ? values[0] : values, set);
+                if (auto) {
+                    set(result);
+                }
+                else {
+                    cleanup = is_function(result) ? result : noop;
+                }
+            };
+            const unsubscribers = stores_array.map((store, i) => store.subscribe((value) => {
+                values[i] = value;
+                pending &= ~(1 << i);
+                if (inited) {
+                    sync();
+                }
+            }, () => {
+                run_all(invalidators);
+                pending |= (1 << i);
+            }));
+            inited = true;
+            sync();
+            return function stop() {
+                run_all(unsubscribers);
+                cleanup();
+            };
+        });
+        return {
+            subscribe(run, invalidate = noop) {
+                invalidators.push(invalidate);
+                const unsubscribe = store.subscribe(run, invalidate);
+                return () => {
+                    const index = invalidators.indexOf(invalidate);
+                    if (index !== -1) {
+                        invalidators.splice(index, 1);
+                    }
+                    unsubscribe();
+                };
+            }
+        };
+    }
+
+    var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+    function createCommonjsModule(fn, module) {
+    	return module = { exports: {} }, fn(module, module.exports), module.exports;
+    }
+
+    var lib = createCommonjsModule(function (module) {
+    // Generated by CoffeeScript 1.10.0
+    (function() {
+      var QJ, rreturn, rtrim;
+
+      QJ = function(selector) {
+        if (QJ.isDOMElement(selector)) {
+          return selector;
+        }
+        return document.querySelectorAll(selector);
+      };
+
+      QJ.isDOMElement = function(el) {
+        return el && (el.nodeName != null);
+      };
+
+      rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+
+      QJ.trim = function(text) {
+        if (text === null) {
+          return "";
+        } else {
+          return (text + "").replace(rtrim, "");
+        }
+      };
+
+      rreturn = /\r/g;
+
+      QJ.val = function(el, val) {
+        var ret;
+        if (arguments.length > 1) {
+          return el.value = val;
+        } else {
+          ret = el.value;
+          if (typeof ret === "string") {
+            return ret.replace(rreturn, "");
+          } else {
+            if (ret === null) {
+              return "";
+            } else {
+              return ret;
+            }
+          }
+        }
+      };
+
+      QJ.preventDefault = function(eventObject) {
+        if (typeof eventObject.preventDefault === "function") {
+          eventObject.preventDefault();
+          return;
+        }
+        eventObject.returnValue = false;
+        return false;
+      };
+
+      QJ.normalizeEvent = function(e) {
+        var original;
+        original = e;
+        e = {
+          which: original.which != null ? original.which : void 0,
+          target: original.target || original.srcElement,
+          preventDefault: function() {
+            return QJ.preventDefault(original);
+          },
+          originalEvent: original,
+          data: original.data || original.detail
+        };
+        if (e.which == null) {
+          e.which = original.charCode != null ? original.charCode : original.keyCode;
+        }
+        return e;
+      };
+
+      QJ.on = function(element, eventName, callback) {
+        var el, i, j, len, len1, multEventName, originalCallback, ref;
+        if (element.length) {
+          for (i = 0, len = element.length; i < len; i++) {
+            el = element[i];
+            QJ.on(el, eventName, callback);
+          }
+          return;
+        }
+        if (eventName.match(" ")) {
+          ref = eventName.split(" ");
+          for (j = 0, len1 = ref.length; j < len1; j++) {
+            multEventName = ref[j];
+            QJ.on(element, multEventName, callback);
+          }
+          return;
+        }
+        originalCallback = callback;
+        callback = function(e) {
+          e = QJ.normalizeEvent(e);
+          return originalCallback(e);
+        };
+        if (element.addEventListener) {
+          return element.addEventListener(eventName, callback, false);
+        }
+        if (element.attachEvent) {
+          eventName = "on" + eventName;
+          return element.attachEvent(eventName, callback);
+        }
+        element['on' + eventName] = callback;
+      };
+
+      QJ.addClass = function(el, className) {
+        var e;
+        if (el.length) {
+          return (function() {
+            var i, len, results;
+            results = [];
+            for (i = 0, len = el.length; i < len; i++) {
+              e = el[i];
+              results.push(QJ.addClass(e, className));
+            }
+            return results;
+          })();
+        }
+        if (el.classList) {
+          return el.classList.add(className);
+        } else {
+          return el.className += ' ' + className;
+        }
+      };
+
+      QJ.hasClass = function(el, className) {
+        var e, hasClass, i, len;
+        if (el.length) {
+          hasClass = true;
+          for (i = 0, len = el.length; i < len; i++) {
+            e = el[i];
+            hasClass = hasClass && QJ.hasClass(e, className);
+          }
+          return hasClass;
+        }
+        if (el.classList) {
+          return el.classList.contains(className);
+        } else {
+          return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+        }
+      };
+
+      QJ.removeClass = function(el, className) {
+        var cls, e, i, len, ref, results;
+        if (el.length) {
+          return (function() {
+            var i, len, results;
+            results = [];
+            for (i = 0, len = el.length; i < len; i++) {
+              e = el[i];
+              results.push(QJ.removeClass(e, className));
+            }
+            return results;
+          })();
+        }
+        if (el.classList) {
+          ref = className.split(' ');
+          results = [];
+          for (i = 0, len = ref.length; i < len; i++) {
+            cls = ref[i];
+            results.push(el.classList.remove(cls));
+          }
+          return results;
+        } else {
+          return el.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+        }
+      };
+
+      QJ.toggleClass = function(el, className, bool) {
+        var e;
+        if (el.length) {
+          return (function() {
+            var i, len, results;
+            results = [];
+            for (i = 0, len = el.length; i < len; i++) {
+              e = el[i];
+              results.push(QJ.toggleClass(e, className, bool));
+            }
+            return results;
+          })();
+        }
+        if (bool) {
+          if (!QJ.hasClass(el, className)) {
+            return QJ.addClass(el, className);
+          }
+        } else {
+          return QJ.removeClass(el, className);
+        }
+      };
+
+      QJ.append = function(el, toAppend) {
+        var e;
+        if (el.length) {
+          return (function() {
+            var i, len, results;
+            results = [];
+            for (i = 0, len = el.length; i < len; i++) {
+              e = el[i];
+              results.push(QJ.append(e, toAppend));
+            }
+            return results;
+          })();
+        }
+        return el.insertAdjacentHTML('beforeend', toAppend);
+      };
+
+      QJ.find = function(el, selector) {
+        if (el instanceof NodeList || el instanceof Array) {
+          el = el[0];
+        }
+        return el.querySelectorAll(selector);
+      };
+
+      QJ.trigger = function(el, name, data) {
+        var ev;
+        try {
+          ev = new CustomEvent(name, {
+            detail: data
+          });
+        } catch (error) {
+          ev = document.createEvent('CustomEvent');
+          if (ev.initCustomEvent) {
+            ev.initCustomEvent(name, true, true, data);
+          } else {
+            ev.initEvent(name, true, true, data);
+          }
+        }
+        return el.dispatchEvent(ev);
+      };
+
+      module.exports = QJ;
+
+    }).call(commonjsGlobal);
+    });
+
+    var lib$1 = createCommonjsModule(function (module) {
+    // Generated by CoffeeScript 1.10.0
+    (function() {
+      var Payment, QJ, cardFromNumber, cardFromType, cards, defaultFormat, formatBackCardNumber, formatBackExpiry, formatCardNumber, formatExpiry, formatForwardExpiry, formatForwardSlash, formatMonthExpiry, hasTextSelected, luhnCheck, reFormatCardNumber, restrictCVC, restrictCardNumber, restrictCombinedExpiry, restrictExpiry, restrictMonthExpiry, restrictNumeric, restrictYearExpiry, setCardType,
+        indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
+      QJ = lib;
+
+      defaultFormat = /(\d{1,4})/g;
+
+      cards = [
+        {
+          type: 'amex',
+          pattern: /^3[47]/,
+          format: /(\d{1,4})(\d{1,6})?(\d{1,5})?/,
+          length: [15],
+          cvcLength: [4],
+          luhn: true
+        }, {
+          type: 'dankort',
+          pattern: /^5019/,
+          format: defaultFormat,
+          length: [16],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'hipercard',
+          pattern: /^(384100|384140|384160|606282|637095|637568|60(?!11))/,
+          format: defaultFormat,
+          length: [14, 15, 16, 17, 18, 19],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'dinersclub',
+          pattern: /^(36|38|30[0-5])/,
+          format: /(\d{1,4})(\d{1,6})?(\d{1,4})?/,
+          length: [14],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'discover',
+          pattern: /^(6011|65|64[4-9]|622)/,
+          format: defaultFormat,
+          length: [16],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'jcb',
+          pattern: /^35/,
+          format: defaultFormat,
+          length: [16],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'laser',
+          pattern: /^(6706|6771|6709)/,
+          format: defaultFormat,
+          length: [16, 17, 18, 19],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'maestro',
+          pattern: /^(5018|5020|5038|6304|6703|6708|6759|676[1-3])/,
+          format: defaultFormat,
+          length: [12, 13, 14, 15, 16, 17, 18, 19],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'mastercard',
+          pattern: /^(5[1-5]|677189)|^(222[1-9]|2[3-6]\d{2}|27[0-1]\d|2720)/,
+          format: defaultFormat,
+          length: [16],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'unionpay',
+          pattern: /^62/,
+          format: defaultFormat,
+          length: [16, 17, 18, 19],
+          cvcLength: [3],
+          luhn: false
+        }, {
+          type: 'visaelectron',
+          pattern: /^4(026|17500|405|508|844|91[37])/,
+          format: defaultFormat,
+          length: [16],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'elo',
+          pattern: /^(4011(78|79)|43(1274|8935)|45(1416|7393|763(1|2))|50(4175|6699|67[0-7][0-9]|9000)|627780|63(6297|6368)|650(03([^4])|04([0-9])|05(0|1)|4(0[5-9]|3[0-9]|8[5-9]|9[0-9])|5([0-2][0-9]|3[0-8])|9([2-6][0-9]|7[0-8])|541|700|720|901)|651652|655000|655021)/,
+          format: defaultFormat,
+          length: [16],
+          cvcLength: [3],
+          luhn: true
+        }, {
+          type: 'visa',
+          pattern: /^4/,
+          format: defaultFormat,
+          length: [13, 16, 19],
+          cvcLength: [3],
+          luhn: true
+        }
+      ];
+
+      cardFromNumber = function(num) {
+        var card, j, len;
+        num = (num + '').replace(/\D/g, '');
+        for (j = 0, len = cards.length; j < len; j++) {
+          card = cards[j];
+          if (card.pattern.test(num)) {
+            return card;
+          }
+        }
+      };
+
+      cardFromType = function(type) {
+        var card, j, len;
+        for (j = 0, len = cards.length; j < len; j++) {
+          card = cards[j];
+          if (card.type === type) {
+            return card;
+          }
+        }
+      };
+
+      luhnCheck = function(num) {
+        var digit, digits, j, len, odd, sum;
+        odd = true;
+        sum = 0;
+        digits = (num + '').split('').reverse();
+        for (j = 0, len = digits.length; j < len; j++) {
+          digit = digits[j];
+          digit = parseInt(digit, 10);
+          if ((odd = !odd)) {
+            digit *= 2;
+          }
+          if (digit > 9) {
+            digit -= 9;
+          }
+          sum += digit;
+        }
+        return sum % 10 === 0;
+      };
+
+      hasTextSelected = function(target) {
+        var ref;
+        try {
+          if ((target.selectionStart != null) && target.selectionStart !== target.selectionEnd) {
+            return true;
+          }
+          if ((typeof document !== "undefined" && document !== null ? (ref = document.selection) != null ? ref.createRange : void 0 : void 0) != null) {
+            if (document.selection.createRange().text) {
+              return true;
+            }
+          }
+        } catch (error) {
+        }
+        return false;
+      };
+
+      reFormatCardNumber = function(e) {
+        return setTimeout((function(_this) {
+          return function() {
+            var target, value;
+            target = e.target;
+            value = QJ.val(target);
+            value = Payment.fns.formatCardNumber(value);
+            QJ.val(target, value);
+            return QJ.trigger(target, 'change');
+          };
+        })());
+      };
+
+      formatCardNumber = function(maxLength) {
+        return function(e) {
+          var card, digit, i, j, len, length, re, target, upperLength, upperLengths, value;
+          digit = String.fromCharCode(e.which);
+          if (!/^\d+$/.test(digit)) {
+            return;
+          }
+          target = e.target;
+          value = QJ.val(target);
+          card = cardFromNumber(value + digit);
+          length = (value.replace(/\D/g, '') + digit).length;
+          upperLengths = [16];
+          if (card) {
+            upperLengths = card.length;
+          }
+          if (maxLength) {
+            upperLengths = upperLengths.filter(function(x) {
+              return x <= maxLength;
+            });
+          }
+          for (i = j = 0, len = upperLengths.length; j < len; i = ++j) {
+            upperLength = upperLengths[i];
+            if (length >= upperLength && upperLengths[i + 1]) {
+              continue;
+            }
+            if (length >= upperLength) {
+              return;
+            }
+          }
+          if (hasTextSelected(target)) {
+            return;
+          }
+          if (card && card.type === 'amex') {
+            re = /^(\d{4}|\d{4}\s\d{6})$/;
+          } else {
+            re = /(?:^|\s)(\d{4})$/;
+          }
+          if (re.test(value)) {
+            e.preventDefault();
+            QJ.val(target, value + ' ' + digit);
+            return QJ.trigger(target, 'change');
+          }
+        };
+      };
+
+      formatBackCardNumber = function(e) {
+        var target, value;
+        target = e.target;
+        value = QJ.val(target);
+        if (e.meta) {
+          return;
+        }
+        if (e.which !== 8) {
+          return;
+        }
+        if (hasTextSelected(target)) {
+          return;
+        }
+        if (/\d\s$/.test(value)) {
+          e.preventDefault();
+          QJ.val(target, value.replace(/\d\s$/, ''));
+          return QJ.trigger(target, 'change');
+        } else if (/\s\d?$/.test(value)) {
+          e.preventDefault();
+          QJ.val(target, value.replace(/\s\d?$/, ''));
+          return QJ.trigger(target, 'change');
+        }
+      };
+
+      formatExpiry = function(e) {
+        var digit, target, val;
+        digit = String.fromCharCode(e.which);
+        if (!/^\d+$/.test(digit)) {
+          return;
+        }
+        target = e.target;
+        val = QJ.val(target) + digit;
+        if (/^\d$/.test(val) && (val !== '0' && val !== '1')) {
+          e.preventDefault();
+          QJ.val(target, "0" + val + " / ");
+          return QJ.trigger(target, 'change');
+        } else if (/^\d\d$/.test(val)) {
+          e.preventDefault();
+          QJ.val(target, val + " / ");
+          return QJ.trigger(target, 'change');
+        }
+      };
+
+      formatMonthExpiry = function(e) {
+        var digit, target, val;
+        digit = String.fromCharCode(e.which);
+        if (!/^\d+$/.test(digit)) {
+          return;
+        }
+        target = e.target;
+        val = QJ.val(target) + digit;
+        if (/^\d$/.test(val) && (val !== '0' && val !== '1')) {
+          e.preventDefault();
+          QJ.val(target, "0" + val);
+          return QJ.trigger(target, 'change');
+        } else if (/^\d\d$/.test(val)) {
+          e.preventDefault();
+          QJ.val(target, "" + val);
+          return QJ.trigger(target, 'change');
+        }
+      };
+
+      formatForwardExpiry = function(e) {
+        var digit, target, val;
+        digit = String.fromCharCode(e.which);
+        if (!/^\d+$/.test(digit)) {
+          return;
+        }
+        target = e.target;
+        val = QJ.val(target);
+        if (/^\d\d$/.test(val)) {
+          QJ.val(target, val + " / ");
+          return QJ.trigger(target, 'change');
+        }
+      };
+
+      formatForwardSlash = function(e) {
+        var slash, target, val;
+        slash = String.fromCharCode(e.which);
+        if (slash !== '/') {
+          return;
+        }
+        target = e.target;
+        val = QJ.val(target);
+        if (/^\d$/.test(val) && val !== '0') {
+          QJ.val(target, "0" + val + " / ");
+          return QJ.trigger(target, 'change');
+        }
+      };
+
+      formatBackExpiry = function(e) {
+        var target, value;
+        if (e.metaKey) {
+          return;
+        }
+        target = e.target;
+        value = QJ.val(target);
+        if (e.which !== 8) {
+          return;
+        }
+        if (hasTextSelected(target)) {
+          return;
+        }
+        if (/\d(\s|\/)+$/.test(value)) {
+          e.preventDefault();
+          QJ.val(target, value.replace(/\d(\s|\/)*$/, ''));
+          return QJ.trigger(target, 'change');
+        } else if (/\s\/\s?\d?$/.test(value)) {
+          e.preventDefault();
+          QJ.val(target, value.replace(/\s\/\s?\d?$/, ''));
+          return QJ.trigger(target, 'change');
+        }
+      };
+
+      restrictNumeric = function(e) {
+        var input;
+        if (e.metaKey || e.ctrlKey) {
+          return true;
+        }
+        if (e.which === 32) {
+          return e.preventDefault();
+        }
+        if (e.which === 0) {
+          return true;
+        }
+        if (e.which < 33) {
+          return true;
+        }
+        input = String.fromCharCode(e.which);
+        if (!/[\d\s]/.test(input)) {
+          return e.preventDefault();
+        }
+      };
+
+      restrictCardNumber = function(maxLength) {
+        return function(e) {
+          var card, digit, length, target, value;
+          target = e.target;
+          digit = String.fromCharCode(e.which);
+          if (!/^\d+$/.test(digit)) {
+            return;
+          }
+          if (hasTextSelected(target)) {
+            return;
+          }
+          value = (QJ.val(target) + digit).replace(/\D/g, '');
+          card = cardFromNumber(value);
+          length = 16;
+          if (card) {
+            length = card.length[card.length.length - 1];
+          }
+          if (maxLength) {
+            length = Math.min(length, maxLength);
+          }
+          if (!(value.length <= length)) {
+            return e.preventDefault();
+          }
+        };
+      };
+
+      restrictExpiry = function(e, length) {
+        var digit, target, value;
+        target = e.target;
+        digit = String.fromCharCode(e.which);
+        if (!/^\d+$/.test(digit)) {
+          return;
+        }
+        if (hasTextSelected(target)) {
+          return;
+        }
+        value = QJ.val(target) + digit;
+        value = value.replace(/\D/g, '');
+        if (value.length > length) {
+          return e.preventDefault();
+        }
+      };
+
+      restrictCombinedExpiry = function(e) {
+        return restrictExpiry(e, 6);
+      };
+
+      restrictMonthExpiry = function(e) {
+        return restrictExpiry(e, 2);
+      };
+
+      restrictYearExpiry = function(e) {
+        return restrictExpiry(e, 4);
+      };
+
+      restrictCVC = function(e) {
+        var digit, target, val;
+        target = e.target;
+        digit = String.fromCharCode(e.which);
+        if (!/^\d+$/.test(digit)) {
+          return;
+        }
+        if (hasTextSelected(target)) {
+          return;
+        }
+        val = QJ.val(target) + digit;
+        if (!(val.length <= 4)) {
+          return e.preventDefault();
+        }
+      };
+
+      setCardType = function(e) {
+        var allTypes, card, cardType, target, val;
+        target = e.target;
+        val = QJ.val(target);
+        cardType = Payment.fns.cardType(val) || 'unknown';
+        if (!QJ.hasClass(target, cardType)) {
+          allTypes = (function() {
+            var j, len, results;
+            results = [];
+            for (j = 0, len = cards.length; j < len; j++) {
+              card = cards[j];
+              results.push(card.type);
+            }
+            return results;
+          })();
+          QJ.removeClass(target, 'unknown');
+          QJ.removeClass(target, allTypes.join(' '));
+          QJ.addClass(target, cardType);
+          QJ.toggleClass(target, 'identified', cardType !== 'unknown');
+          return QJ.trigger(target, 'payment.cardType', cardType);
+        }
+      };
+
+      Payment = (function() {
+        function Payment() {}
+
+        Payment.fns = {
+          cardExpiryVal: function(value) {
+            var month, prefix, ref, year;
+            value = value.replace(/\s/g, '');
+            ref = value.split('/', 2), month = ref[0], year = ref[1];
+            if ((year != null ? year.length : void 0) === 2 && /^\d+$/.test(year)) {
+              prefix = (new Date).getFullYear();
+              prefix = prefix.toString().slice(0, 2);
+              year = prefix + year;
+            }
+            month = parseInt(month, 10);
+            year = parseInt(year, 10);
+            return {
+              month: month,
+              year: year
+            };
+          },
+          validateCardNumber: function(num) {
+            var card, ref;
+            num = (num + '').replace(/\s+|-/g, '');
+            if (!/^\d+$/.test(num)) {
+              return false;
+            }
+            card = cardFromNumber(num);
+            if (!card) {
+              return false;
+            }
+            return (ref = num.length, indexOf.call(card.length, ref) >= 0) && (card.luhn === false || luhnCheck(num));
+          },
+          validateCardExpiry: function(month, year) {
+            var currentTime, expiry, prefix, ref, ref1;
+            if (typeof month === 'object' && 'month' in month) {
+              ref = month, month = ref.month, year = ref.year;
+            } else if (typeof month === 'string' && indexOf.call(month, '/') >= 0) {
+              ref1 = Payment.fns.cardExpiryVal(month), month = ref1.month, year = ref1.year;
+            }
+            if (!(month && year)) {
+              return false;
+            }
+            month = QJ.trim(month);
+            year = QJ.trim(year);
+            if (!/^\d+$/.test(month)) {
+              return false;
+            }
+            if (!/^\d+$/.test(year)) {
+              return false;
+            }
+            month = parseInt(month, 10);
+            if (!(month && month <= 12)) {
+              return false;
+            }
+            if (year.length === 2) {
+              prefix = (new Date).getFullYear();
+              prefix = prefix.toString().slice(0, 2);
+              year = prefix + year;
+            }
+            expiry = new Date(year, month);
+            currentTime = new Date;
+            expiry.setMonth(expiry.getMonth() - 1);
+            expiry.setMonth(expiry.getMonth() + 1, 1);
+            return expiry > currentTime;
+          },
+          validateCardCVC: function(cvc, type) {
+            var ref, ref1;
+            cvc = QJ.trim(cvc);
+            if (!/^\d+$/.test(cvc)) {
+              return false;
+            }
+            if (type && cardFromType(type)) {
+              return ref = cvc.length, indexOf.call((ref1 = cardFromType(type)) != null ? ref1.cvcLength : void 0, ref) >= 0;
+            } else {
+              return cvc.length >= 3 && cvc.length <= 4;
+            }
+          },
+          cardType: function(num) {
+            var ref;
+            if (!num) {
+              return null;
+            }
+            return ((ref = cardFromNumber(num)) != null ? ref.type : void 0) || null;
+          },
+          formatCardNumber: function(num) {
+            var card, groups, ref, upperLength;
+            card = cardFromNumber(num);
+            if (!card) {
+              return num;
+            }
+            upperLength = card.length[card.length.length - 1];
+            num = num.replace(/\D/g, '');
+            num = num.slice(0, upperLength);
+            if (card.format.global) {
+              return (ref = num.match(card.format)) != null ? ref.join(' ') : void 0;
+            } else {
+              groups = card.format.exec(num);
+              if (groups == null) {
+                return;
+              }
+              groups.shift();
+              groups = groups.filter(function(n) {
+                return n;
+              });
+              return groups.join(' ');
+            }
+          }
+        };
+
+        Payment.restrictNumeric = function(el) {
+          return QJ.on(el, 'keypress', restrictNumeric);
+        };
+
+        Payment.cardExpiryVal = function(el) {
+          return Payment.fns.cardExpiryVal(QJ.val(el));
+        };
+
+        Payment.formatCardCVC = function(el) {
+          Payment.restrictNumeric(el);
+          QJ.on(el, 'keypress', restrictCVC);
+          return el;
+        };
+
+        Payment.formatCardExpiry = function(el) {
+          var month, year;
+          Payment.restrictNumeric(el);
+          if (el.length && el.length === 2) {
+            month = el[0], year = el[1];
+            this.formatCardExpiryMultiple(month, year);
+          } else {
+            QJ.on(el, 'keypress', restrictCombinedExpiry);
+            QJ.on(el, 'keypress', formatExpiry);
+            QJ.on(el, 'keypress', formatForwardSlash);
+            QJ.on(el, 'keypress', formatForwardExpiry);
+            QJ.on(el, 'keydown', formatBackExpiry);
+          }
+          return el;
+        };
+
+        Payment.formatCardExpiryMultiple = function(month, year) {
+          QJ.on(month, 'keypress', restrictMonthExpiry);
+          QJ.on(month, 'keypress', formatMonthExpiry);
+          return QJ.on(year, 'keypress', restrictYearExpiry);
+        };
+
+        Payment.formatCardNumber = function(el, maxLength) {
+          Payment.restrictNumeric(el);
+          QJ.on(el, 'keypress', restrictCardNumber(maxLength));
+          QJ.on(el, 'keypress', formatCardNumber(maxLength));
+          QJ.on(el, 'keydown', formatBackCardNumber);
+          QJ.on(el, 'keyup blur', setCardType);
+          QJ.on(el, 'paste', reFormatCardNumber);
+          QJ.on(el, 'input', reFormatCardNumber);
+          return el;
+        };
+
+        Payment.getCardArray = function() {
+          return cards;
+        };
+
+        Payment.setCardArray = function(cardArray) {
+          cards = cardArray;
+          return true;
+        };
+
+        Payment.addToCardArray = function(cardObject) {
+          return cards.push(cardObject);
+        };
+
+        Payment.removeFromCardArray = function(type) {
+          var key, value;
+          for (key in cards) {
+            value = cards[key];
+            if (value.type === type) {
+              cards.splice(key, 1);
+            }
+          }
+          return true;
+        };
+
+        return Payment;
+
+      })();
+
+      module.exports = Payment;
+
+      commonjsGlobal.Payment = Payment;
+
+    }).call(commonjsGlobal);
+    });
+
+    const num = writable("4915666431345739");
+    const name = writable("Juan Fernando");
+    const month = writable("04");
+    const year = writable("20");
+    const ccv = writable("434");
+
+    const isNumberValid = derived(num, $num =>
+      lib$1.fns.validateCardNumber($num)
+    );
+    const isCcvValid = derived(ccv, $ccv =>
+      lib$1.fns.validateCardCVC($ccv)
+    );
+    const isDateValid = derived([month, year], ([$month, $year]) =>
+      lib$1.fns.validateCardExpiry($month, $year)
+    );
+
+    /* src/components/Card.svelte generated by Svelte v3.5.1 */
+
+    const file = "src/components/Card.svelte";
+
+    // (74:8) {#if cardType}
+    function create_if_block(ctx) {
+    	var img, img_src_value;
+
+    	return {
+    		c: function create() {
+    			img = element("img");
+    			img.src = img_src_value = ctx.cardTypes[ctx.cardType].icon;
+    			img.alt = ctx.cardType;
+    			img.className = "w-auto h-16";
+    			add_location(img, file, 74, 10, 2174);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, img, anchor);
+    		},
+
+    		p: function update(changed, ctx) {
+    			if ((changed.cardType) && img_src_value !== (img_src_value = ctx.cardTypes[ctx.cardType].icon)) {
+    				img.src = img_src_value;
+    			}
+
+    			if (changed.cardType) {
+    				img.alt = ctx.cardType;
+    			}
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(img);
+    			}
+    		}
+    	};
+    }
+
+    function create_fragment(ctx) {
+    	var div6, div5, div4, img, t0, div0, t1, t2, div1, t3, t4, t5, t6, div3, div2, t7, t8;
+
+    	var if_block = (ctx.cardType) && create_if_block(ctx);
+
+    	return {
+    		c: function create() {
+    			div6 = element("div");
+    			div5 = element("div");
+    			div4 = element("div");
+    			img = element("img");
+    			t0 = space();
+    			div0 = element("div");
+    			t1 = text(ctx.ccNum);
+    			t2 = space();
+    			div1 = element("div");
+    			t3 = text(ctx.store_month);
+    			t4 = text("/");
+    			t5 = text(ctx.store_year);
+    			t6 = space();
+    			div3 = element("div");
+    			div2 = element("div");
+    			t7 = text(ctx.store_name);
+    			t8 = space();
+    			if (if_block) if_block.c();
+    			img.src = "https://cdn0.iconfinder.com/data/icons/fatcow/32/card_chip_gold.png";
+    			set_style(img, "width", "32px");
+    			set_style(img, "height", "32px");
+    			img.alt = "Chip";
+    			add_location(img, file, 63, 6, 1742);
+    			div0.className = "text-center text-2xl font-medium tracking-wide";
+    			add_location(div0, file, 67, 6, 1900);
+    			div1.className = "text-center";
+    			add_location(div1, file, 70, 6, 1997);
+    			add_location(div2, file, 72, 8, 2117);
+    			div3.className = "flex justify-between items-center";
+    			add_location(div3, file, 71, 6, 2061);
+    			div4.className = "absolute inset-0 flex flex-col justify-between p-8";
+    			add_location(div4, file, 62, 4, 1671);
+    			div5.className = "pt-ar relative w-full rounded-lg shadow";
+    			set_style(div5, "background", (ctx.cardType ? ctx.cardTypes[ctx.cardType].background : 'white'));
+    			set_style(div5, "color", (ctx.cardType ? ctx.cardTypes[ctx.cardType].color : '#444'));
+    			add_location(div5, file, 58, 2, 1470);
+    			div6.className = "w-full md:max-w-lg flex items-center";
+    			add_location(div6, file, 57, 0, 1417);
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div6, anchor);
+    			append(div6, div5);
+    			append(div5, div4);
+    			append(div4, img);
+    			append(div4, t0);
+    			append(div4, div0);
+    			append(div0, t1);
+    			append(div4, t2);
+    			append(div4, div1);
+    			append(div1, t3);
+    			append(div1, t4);
+    			append(div1, t5);
+    			append(div4, t6);
+    			append(div4, div3);
+    			append(div3, div2);
+    			append(div2, t7);
+    			append(div3, t8);
+    			if (if_block) if_block.m(div3, null);
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (changed.ccNum) {
+    				set_data(t1, ctx.ccNum);
+    			}
+
+    			if (changed.store_month) {
+    				set_data(t3, ctx.store_month);
+    			}
+
+    			if (changed.store_year) {
+    				set_data(t5, ctx.store_year);
+    			}
+
+    			if (changed.store_name) {
+    				set_data(t7, ctx.store_name);
+    			}
+
+    			if (ctx.cardType) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    				} else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					if_block.m(div3, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (changed.cardType || changed.cardTypes) {
+    				set_style(div5, "background", (ctx.cardType ? ctx.cardTypes[ctx.cardType].background : 'white'));
+    				set_style(div5, "color", (ctx.cardType ? ctx.cardTypes[ctx.cardType].color : '#444'));
+    			}
+    		},
+
+    		i: noop,
+    		o: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div6);
+    			}
+
+    			if (if_block) if_block.d();
+    		}
+    	};
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	
+
+      let store_num, store_name, store_month, store_year;
+
+      num.subscribe(val => {
+        $$invalidate('store_num', store_num = val);
+      });
+      name.subscribe(val => {
+        $$invalidate('store_name', store_name = val);
+      });
+      month.subscribe(val => {
+        $$invalidate('store_month', store_month = val);
+      });
+      year.subscribe(val => {
+        $$invalidate('store_year', store_year = val);
+      });
+      ccv.subscribe(val => {
+      });
+
+      let cardType;
+
+      let cardTypes = {
+        visa: {
+          background:
+            "linear-gradient(28deg, rgba(26,55,113,1) 0%, rgba(81,110,153,1) 50%, rgba(26,50,113,1) 100%)",
+          color: "#c4dcff",
+          icon:
+            "https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-08-512.png"
+        },
+        mastercard: {
+          color: "#fff0db",
+          background:
+            "linear-gradient(0deg, rgba(105,83,57,1) 0%, rgba(231,184,116,1) 100%)",
+          icon:
+            "https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-07-512.png"
+        },
+        amex: {
+          background:
+            "linear-gradient(0deg, rgba(145,158,164,1) 0%, rgba(215,224,228,1) 100%)",
+          color: "#3e535e",
+          icon:
+            "https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-05-512.png"
+        }
+      };
+
+    	let ccNum;
+
+    	$$self.$$.update = ($$dirty = { store_num: 1 }) => {
+    		if ($$dirty.store_num) { {
+            $$invalidate('cardType', cardType = lib$1.fns.cardType(store_num));
+          } }
+    		if ($$dirty.store_num) { $$invalidate('ccNum', ccNum = store_num
+            .replace(/[^\dA-Z]/g, "")
+            .replace(/(.{4})/g, "$1 ")
+            .trim()); }
+    	};
+
+    	return {
+    		store_name,
+    		store_month,
+    		store_year,
+    		cardType,
+    		cardTypes,
+    		ccNum
+    	};
+    }
+
+    class Card extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance, create_fragment, safe_not_equal, []);
+    	}
+    }
+
+    /* src/components/Form.svelte generated by Svelte v3.5.1 */
+
+    const file$1 = "src/components/Form.svelte";
+
+    // (101:2) {#if isValid}
+    function create_if_block$1(ctx) {
+    	var button;
+
+    	return {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Continue";
+    			button.className = "bg-green-500 hover:bg-green-700 text-white font-bold py-2 w-full\n      mt-6 rounded";
+    			add_location(button, file$1, 101, 4, 3282);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, button, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(button);
+    			}
+    		}
+    	};
+    }
+
+    function create_fragment$1(ctx) {
+    	var div7, div1, div0, svg, path, t0, h2, t2, div2, label0, t4, input0, t5, div6, label1, t7, div5, div3, input1, t8, div4, input2, t9, input3, t10, input4, t11, dispose;
+
+    	var if_block = (ctx.isValid) && create_if_block$1();
+
+    	return {
+    		c: function create() {
+    			div7 = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			t0 = space();
+    			h2 = element("h2");
+    			h2.textContent = "Your Payment Information";
+    			t2 = space();
+    			div2 = element("div");
+    			label0 = element("label");
+    			label0.textContent = "Name on card";
+    			t4 = space();
+    			input0 = element("input");
+    			t5 = space();
+    			div6 = element("div");
+    			label1 = element("label");
+    			label1.textContent = "Credit Card info";
+    			t7 = space();
+    			div5 = element("div");
+    			div3 = element("div");
+    			input1 = element("input");
+    			t8 = space();
+    			div4 = element("div");
+    			input2 = element("input");
+    			t9 = space();
+    			input3 = element("input");
+    			t10 = space();
+    			input4 = element("input");
+    			t11 = space();
+    			if (if_block) if_block.c();
+    			attr(path, "d", "M272.715,286.341H145.518c-12.538,0-22.715,10.179-22.715,22.715\n          s10.177,22.716,22.715,22.716h127.197c12.537,0,22.712-10.18,22.712-22.716S285.252,286.341,272.715,286.341z\n          M31.949,386.284\n          c0,20.079,16.264,36.34,36.34,36.34h363.421c20.078,0,36.34-16.261,36.34-36.34V113.718c0-20.079-16.262-36.343-36.34-36.343H68.29\n          c-20.077,0-36.34,16.264-36.34,36.343V386.284z\n          M97.367,122.802h305.267c11.084,0,19.99,8.909,19.99,19.991v25.438H77.375v-25.438\n          C77.375,131.711,86.28,122.802,97.367,122.802z\n          M77.375,240.914h345.249v116.292c0,11.081-8.906,19.992-19.99,19.992H97.367\n          c-11.086,0-19.991-8.911-19.991-19.992V240.914z");
+    			add_location(path, file$1, 35, 8, 799);
+    			attr(svg, "class", "w-full fill-current text-indigo-400");
+    			attr(svg, "viewBox", "0 0 500 500");
+    			add_location(svg, file$1, 34, 6, 719);
+    			div0.className = "w-1/4 border-2 border-indigo-400 px-2 py-2 rounded-full font-bold\n      mr-2";
+    			add_location(div0, file$1, 31, 4, 616);
+    			h2.className = "text-lg font-medium text-gray-800";
+    			add_location(h2, file$1, 47, 4, 1535);
+    			div1.className = "flex items-center mb-4";
+    			add_location(div1, file$1, 30, 2, 575);
+    			label0.htmlFor = "payment";
+    			label0.className = "block text text-gray-700 mb-2";
+    			add_location(label0, file$1, 51, 4, 1646);
+    			attr(input0, "type", "text");
+    			input0.className = "w-full flex-1 text-sm bg-gray-200 text-gray-700 rounded p-3\n      focus:outline-none";
+    			input0.placeholder = "John Doe";
+    			input0.maxLength = "20";
+    			add_location(input0, file$1, 54, 4, 1742);
+    			div2.className = "mb-4";
+    			add_location(div2, file$1, 50, 2, 1623);
+    			label1.htmlFor = "payment";
+    			label1.className = "block text text-gray-700 mb-2";
+    			add_location(label1, file$1, 63, 4, 1965);
+    			attr(input1, "type", "text");
+    			input1.className = "w-full flex-1 text-sm bg-gray-200 text-gray-700 pl-3 py-3\n          focus:outline-none rounded-l sm:rounded-b-none sm:rounded-t\n          lg:rounded-r-none lg:rounded-l";
+    			input1.placeholder = "Card Number";
+    			input1.maxLength = "16";
+    			add_location(input1, file$1, 68, 8, 2175);
+    			div3.className = "flex w-1/2 sm:block sm:w-full";
+    			add_location(div3, file$1, 67, 6, 2123);
+    			attr(input2, "type", "text");
+    			input2.className = "w-1/3 block text-sm bg-gray-200 text-gray-700 py-3\n          focus:outline-none sm:pl-3 sm:rounded-bl lg:rounded-none";
+    			input2.placeholder = "MM";
+    			add_location(input2, file$1, 78, 8, 2545);
+    			attr(input3, "type", "text");
+    			input3.className = "w-1/3 block text-sm bg-gray-200 text-gray-700 py-3\n          focus:outline-none";
+    			input3.placeholder = "YY";
+    			add_location(input3, file$1, 84, 8, 2778);
+    			attr(input4, "type", "text");
+    			input4.className = "w-1/3 block text-sm bg-gray-200 text-gray-700 py-3 pr-y\n          focus:outline-none rounded-r sm:rounded-br sm:rounded-tr-none\n          lg:rounded-r";
+    			input4.placeholder = "CCV";
+    			add_location(input4, file$1, 90, 8, 2972);
+    			div4.className = "flex w-full lg:w-1/2";
+    			add_location(div4, file$1, 77, 6, 2502);
+    			div5.className = "flex flex-row sm:flex-col lg:flex-row";
+    			add_location(div5, file$1, 66, 4, 2065);
+    			add_location(div6, file$1, 62, 2, 1955);
+    			div7.className = "bg-white shadow p-8 rounded-lg";
+    			add_location(div7, file$1, 29, 0, 528);
+
+    			dispose = [
+    				listen(input0, "input", ctx.input0_input_handler),
+    				listen(input1, "input", ctx.input1_input_handler),
+    				listen(input2, "input", ctx.input2_input_handler),
+    				listen(input3, "input", ctx.input3_input_handler),
+    				listen(input4, "input", ctx.input4_input_handler)
+    			];
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div7, anchor);
+    			append(div7, div1);
+    			append(div1, div0);
+    			append(div0, svg);
+    			append(svg, path);
+    			append(div1, t0);
+    			append(div1, h2);
+    			append(div7, t2);
+    			append(div7, div2);
+    			append(div2, label0);
+    			append(div2, t4);
+    			append(div2, input0);
+
+    			input0.value = ctx.$name;
+
+    			append(div7, t5);
+    			append(div7, div6);
+    			append(div6, label1);
+    			append(div6, t7);
+    			append(div6, div5);
+    			append(div5, div3);
+    			append(div3, input1);
+
+    			input1.value = ctx.$num;
+
+    			append(div5, t8);
+    			append(div5, div4);
+    			append(div4, input2);
+
+    			input2.value = ctx.$month;
+
+    			append(div4, t9);
+    			append(div4, input3);
+
+    			input3.value = ctx.$year;
+
+    			append(div4, t10);
+    			append(div4, input4);
+
+    			input4.value = ctx.$ccv;
+
+    			append(div7, t11);
+    			if (if_block) if_block.m(div7, null);
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (changed.$name && (input0.value !== ctx.$name)) input0.value = ctx.$name;
+    			if (changed.$num && (input1.value !== ctx.$num)) input1.value = ctx.$num;
+    			if (changed.$month && (input2.value !== ctx.$month)) input2.value = ctx.$month;
+    			if (changed.$year && (input3.value !== ctx.$year)) input3.value = ctx.$year;
+    			if (changed.$ccv && (input4.value !== ctx.$ccv)) input4.value = ctx.$ccv;
+
+    			if (ctx.isValid) {
+    				if (!if_block) {
+    					if_block = create_if_block$1();
+    					if_block.c();
+    					if_block.m(div7, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+
+    		i: noop,
+    		o: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div7);
+    			}
+
+    			if (if_block) if_block.d();
+    			run_all(dispose);
+    		}
+    	};
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let $name, $num, $month, $year, $ccv;
+
+    	validate_store(name, 'name');
+    	subscribe($$self, name, $$value => { $name = $$value; $$invalidate('$name', $name); });
+    	validate_store(num, 'num');
+    	subscribe($$self, num, $$value => { $num = $$value; $$invalidate('$num', $num); });
+    	validate_store(month, 'month');
+    	subscribe($$self, month, $$value => { $month = $$value; $$invalidate('$month', $month); });
+    	validate_store(year, 'year');
+    	subscribe($$self, year, $$value => { $year = $$value; $$invalidate('$year', $year); });
+    	validate_store(ccv, 'ccv');
+    	subscribe($$self, ccv, $$value => { $ccv = $$value; $$invalidate('$ccv', $ccv); });
+
+    	let store_isNumberValid;
+      let store_isCcvValid;
+      let store_isDateValid;
+
+      isNumberValid.subscribe(val => {
+        $$invalidate('store_isNumberValid', store_isNumberValid = val);
+      });
+      isCcvValid.subscribe(val => {
+        $$invalidate('store_isCcvValid', store_isCcvValid = val);
+      });
+      isDateValid.subscribe(val => {
+        $$invalidate('store_isDateValid', store_isDateValid = val);
+      });
+
+    	function input0_input_handler() {
+    		name.set(this.value);
+    	}
+
+    	function input1_input_handler() {
+    		num.set(this.value);
+    	}
+
+    	function input2_input_handler() {
+    		month.set(this.value);
+    	}
+
+    	function input3_input_handler() {
+    		year.set(this.value);
+    	}
+
+    	function input4_input_handler() {
+    		ccv.set(this.value);
+    	}
+
+    	let isValid;
+
+    	$$self.$$.update = ($$dirty = { store_isNumberValid: 1, store_isCcvValid: 1, store_isDateValid: 1 }) => {
+    		if ($$dirty.store_isNumberValid || $$dirty.store_isCcvValid || $$dirty.store_isDateValid) { $$invalidate('isValid', isValid =
+            (store_isNumberValid && store_isCcvValid && store_isDateValid) || false); }
+    	};
+
+    	return {
+    		isValid,
+    		$name,
+    		$num,
+    		$month,
+    		$year,
+    		$ccv,
+    		input0_input_handler,
+    		input1_input_handler,
+    		input2_input_handler,
+    		input3_input_handler,
+    		input4_input_handler
+    	};
+    }
+
+    class Form extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, []);
+    	}
+    }
+
+    /* src/App.svelte generated by Svelte v3.5.1 */
+
+    const file$2 = "src/App.svelte";
+
+    function create_fragment$2(ctx) {
+    	var div1, div0, t, current;
+
+    	var form = new Form({ $$inline: true });
+
+    	var card = new Card({ $$inline: true });
+
+    	return {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			form.$$.fragment.c();
+    			t = space();
+    			card.$$.fragment.c();
+    			div0.className = "w-full sm:w-2/5 md:w-1/2 flex items-center mb-4 sm:mb-0";
+    			add_location(div0, file$2, 9, 2, 267);
+    			div1.className = "sm:bg-red-400 md:bg-blue-400 lg:bg-green-400 xl:bg-indigo-400 flex\n  justify-center h-screen flex-col sm:flex-row px-3";
+    			add_location(div1, file$2, 6, 0, 130);
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div1, anchor);
+    			append(div1, div0);
+    			mount_component(form, div0, null);
+    			append(div1, t);
+    			mount_component(card, div1, null);
+    			current = true;
+    		},
+
+    		p: noop,
+
+    		i: function intro(local) {
+    			if (current) return;
+    			form.$$.fragment.i(local);
+
+    			card.$$.fragment.i(local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			form.$$.fragment.o(local);
+    			card.$$.fragment.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div1);
+    			}
+
+    			form.$destroy();
+
+    			card.$destroy();
+    		}
+    	};
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$2, safe_not_equal, []);
+    	}
+    }
+
+    const app = new App({
+      target: document.body
+    });
+
+    return app;
+
+}());
 //# sourceMappingURL=bundle.js.map

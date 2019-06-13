@@ -1,5 +1,5 @@
 <script>
-  import { num, name, month, year, ccv, isValid } from "../store";
+  import { num, name, month, year, ccv } from "../store";
   import Payment from "payment";
 
   let store_num, store_name, store_month, store_year, store_ccv;
@@ -21,9 +21,6 @@
   });
 
   let cardType;
-  let isNumberValid = false;
-  let isDateValid = false;
-  let isCcvValid = false;
 
   let cardTypes = {
     visa: {
@@ -51,18 +48,16 @@
 
   $: {
     cardType = Payment.fns.cardType(store_num);
-    isNumberValid = Payment.fns.validateCardNumber(store_num);
-    isCcvValid = Payment.fns.validateCardCVC(store_ccv);
-    isDateValid = Payment.fns.validateCardExpiry(store_month, store_year);
-    console.log(store_num, store_month, store_year, store_ccv);
-    console.log(isNumberValid, isCcvValid, isDateValid);
-    isValid.set(isNumberValid && isCcvValid && isDateValid);
   }
+  $: ccNum = store_num
+    .replace(/[^\dA-Z]/g, "")
+    .replace(/(.{4})/g, "$1 ")
+    .trim();
 </script>
 
-<div class="w-full md:max-w-lg">
+<div class="w-full md:max-w-lg flex items-center">
   <div
-    class="pt-ar relative rounded-lg shadow"
+    class="pt-ar relative w-full rounded-lg shadow"
     style="background: {cardType ? cardTypes[cardType].background : 'white'};
     color: {cardType ? cardTypes[cardType].color : '#444'};">
     <div class="absolute inset-0 flex flex-col justify-between p-8">
@@ -71,7 +66,7 @@
         style="width: 32px; height: 32px;"
         alt="Chip" />
       <div class="text-center text-2xl font-medium tracking-wide">
-         {store_num}
+         {ccNum}
       </div>
       <div class="text-center">{store_month}/{store_year}</div>
       <div class="flex justify-between items-center">

@@ -1,9 +1,30 @@
 <script>
-  import { num, name, month, year, ccv, isValid } from "../store";
-  let isValidCC;
-  isValid.subscribe(val => {
-    isValidCC = val;
+  import {
+    num,
+    name,
+    month,
+    year,
+    ccv,
+    isNumberValid,
+    isCcvValid,
+    isDateValid
+  } from "../store";
+
+  let store_isNumberValid;
+  let store_isCcvValid;
+  let store_isDateValid;
+
+  isNumberValid.subscribe(val => {
+    store_isNumberValid = val;
   });
+  isCcvValid.subscribe(val => {
+    store_isCcvValid = val;
+  });
+  isDateValid.subscribe(val => {
+    store_isDateValid = val;
+  });
+  $: isValid =
+    (store_isNumberValid && store_isCcvValid && store_isDateValid) || false;
 </script>
 
 <div class="bg-white shadow p-8 rounded-lg">
@@ -36,7 +57,8 @@
       class="w-full flex-1 text-sm bg-gray-200 text-gray-700 rounded p-3
       focus:outline-none"
       bind:value={$name}
-      placeholder="John Doe" />
+      placeholder="John Doe"
+      maxlength="20" />
   </div>
   <div>
     <label for="payment" class="block text text-gray-700 mb-2">
@@ -76,11 +98,11 @@
       </div>
     </div>
   </div>
-  {#if isValidCC}
+  {#if isValid}
     <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-full mt-6
-      rounded">
-      Button
+      class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 w-full
+      mt-6 rounded">
+      Continue
     </button>
   {/if}
 </div>
