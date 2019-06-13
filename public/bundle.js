@@ -244,8 +244,8 @@ var app = (function () {
     			t0 = text("Hello ");
     			t1 = text(ctx.name);
     			t2 = text("!");
-    			h1.className = "svelte-i7qo5m";
-    			add_location(h1, file, 10, 0, 82);
+    			h1.className = "svelte-1ucbz36";
+    			add_location(h1, file, 10, 0, 87);
     		},
 
     		l: function claim(nodes) {
@@ -313,10 +313,7 @@ var app = (function () {
     }
 
     const app = new App({
-    	target: document.body,
-    	props: {
-    		name: 'world'
-    	}
+      target: document.body
     });
 
     return app;
