@@ -1,3 +1,11 @@
+<script>
+  import { num, name, month, year, ccv, isValid } from "../store";
+  let isValidCC;
+  isValid.subscribe(val => {
+    isValidCC = val;
+  });
+</script>
+
 <div class="bg-white shadow p-8 rounded-lg">
   <div class="flex items-center mb-4">
     <div
@@ -27,28 +35,52 @@
       type="text"
       class="w-full flex-1 text-sm bg-gray-200 text-gray-700 rounded p-3
       focus:outline-none"
+      bind:value={$name}
       placeholder="John Doe" />
   </div>
   <div>
     <label for="payment" class="block text text-gray-700 mb-2">
       Credit Card info
     </label>
-    <div class="flex">
-      <input
-        type="text"
-        class="w-5/6 flex-1 text-sm bg-gray-200 text-gray-700 rounded-l p-3
-        focus:outline-none"
-        placeholder="Card Number" />
-      <input
-        type="text"
-        class="w-1/6 inline-block text-sm bg-gray-200 text-gray-700 p-3
-        focus:outline-none"
-        placeholder="MM / YY" />
-      <input
-        type="text"
-        class="w-1/6 inline-block text-sm bg-gray-200 text-gray-700 rounded-r
-        p-3 focus:outline-none"
-        placeholder="CVC" />
+    <div class="flex flex-row sm:flex-col lg:flex-row">
+      <div class="flex w-1/2 sm:block sm:w-full">
+        <input
+          type="text"
+          class="w-full flex-1 text-sm bg-gray-200 text-gray-700 pl-3 py-3
+          focus:outline-none rounded-l sm:rounded-b-none sm:rounded-t
+          lg:rounded-r-none lg:rounded-l"
+          bind:value={$num}
+          placeholder="Card Number"
+          maxlength="16" />
+      </div>
+      <div class="flex w-full lg:w-1/2">
+        <input
+          type="text"
+          class="w-1/3 block text-sm bg-gray-200 text-gray-700 py-3
+          focus:outline-none sm:pl-3 sm:rounded-bl lg:rounded-none"
+          bind:value={$month}
+          placeholder="MM" />
+        <input
+          type="text"
+          class="w-1/3 block text-sm bg-gray-200 text-gray-700 py-3
+          focus:outline-none"
+          bind:value={$year}
+          placeholder="YY" />
+        <input
+          type="text"
+          class="w-1/3 block text-sm bg-gray-200 text-gray-700 py-3 pr-y
+          focus:outline-none rounded-r sm:rounded-br sm:rounded-tr-none
+          lg:rounded-r"
+          bind:value={$ccv}
+          placeholder="CCV" />
+      </div>
     </div>
   </div>
+  {#if isValidCC}
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-full mt-6
+      rounded">
+      Button
+    </button>
+  {/if}
 </div>

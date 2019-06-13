@@ -24,6 +24,17 @@ var app = (function () {
     function safe_not_equal(a, b) {
         return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
     }
+    function validate_store(store, name) {
+        if (!store || typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(component, store, callback) {
+        const unsub = store.subscribe(callback);
+        component.$$.on_destroy.push(unsub.unsubscribe
+            ? () => unsub.unsubscribe()
+            : unsub);
+    }
 
     function append(target, node) {
         target.appendChild(node);
@@ -63,6 +74,9 @@ var app = (function () {
         data = '' + data;
         if (text.data !== data)
             text.data = data;
+    }
+    function set_style(node, key, value) {
+        node.style.setProperty(key, value);
     }
 
     let current_component;
@@ -246,6 +260,55 @@ var app = (function () {
             };
         }
     }
+
+    /**
+     * Create a `Writable` store that allows both updating and reading by subscription.
+     * @param {*=}value initial value
+     * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+     */
+    function writable(value, start = noop) {
+        let stop;
+        const subscribers = [];
+        function set(new_value) {
+            if (safe_not_equal(value, new_value)) {
+                value = new_value;
+                if (!stop) {
+                    return; // not ready
+                }
+                subscribers.forEach((s) => s[1]());
+                subscribers.forEach((s) => s[0](value));
+            }
+        }
+        function update(fn) {
+            set(fn(value));
+        }
+        function subscribe(run, invalidate = noop) {
+            const subscriber = [run, invalidate];
+            subscribers.push(subscriber);
+            if (subscribers.length === 1) {
+                stop = start(set) || noop;
+            }
+            run(value);
+            return () => {
+                const index = subscribers.indexOf(subscriber);
+                if (index !== -1) {
+                    subscribers.splice(index, 1);
+                }
+                if (subscribers.length === 0) {
+                    stop();
+                }
+            };
+        }
+        return { set, update, subscribe };
+    }
+
+    const num = writable("4915666431345739");
+    const name = writable("Juan Fernando");
+    const month = writable("04");
+    const year = writable("20");
+    const ccv = writable("434");
+
+    const isValid = writable(false);
 
     var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1130,21 +1193,86 @@ var app = (function () {
 
     const file = "src/components/Card.svelte";
 
-    function create_fragment(ctx) {
-    	var div2, div1, div0, t;
+    // (85:8) {#if cardType}
+    function create_if_block(ctx) {
+    	var img, img_src_value;
 
     	return {
     		c: function create() {
-    			div2 = element("div");
-    			div1 = element("div");
+    			img = element("img");
+    			img.src = img_src_value = ctx.cardTypes[ctx.cardType].icon;
+    			img.alt = ctx.cardType;
+    			img.className = "w-auto h-16";
+    			add_location(img, file, 85, 10, 2611);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, img, anchor);
+    		},
+
+    		p: function update(changed, ctx) {
+    			if ((changed.cardType) && img_src_value !== (img_src_value = ctx.cardTypes[ctx.cardType].icon)) {
+    				img.src = img_src_value;
+    			}
+
+    			if (changed.cardType) {
+    				img.alt = ctx.cardType;
+    			}
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(img);
+    			}
+    		}
+    	};
+    }
+
+    function create_fragment(ctx) {
+    	var div6, div5, div4, img, t0, div0, t1, t2, div1, t3, t4, t5, t6, div3, div2, t7, t8;
+
+    	var if_block = (ctx.cardType) && create_if_block(ctx);
+
+    	return {
+    		c: function create() {
+    			div6 = element("div");
+    			div5 = element("div");
+    			div4 = element("div");
+    			img = element("img");
+    			t0 = space();
     			div0 = element("div");
-    			t = text(ctx.cardType);
-    			div0.className = "absolute inset-0";
-    			add_location(div0, file, 27, 4, 671);
-    			div1.className = "pt-ar bg-white relative rounded-lg shadow";
-    			add_location(div1, file, 26, 2, 611);
-    			div2.className = "w-full";
-    			add_location(div2, file, 25, 0, 588);
+    			t1 = text(ctx.store_num);
+    			t2 = space();
+    			div1 = element("div");
+    			t3 = text(ctx.store_month);
+    			t4 = text("/");
+    			t5 = text(ctx.store_year);
+    			t6 = space();
+    			div3 = element("div");
+    			div2 = element("div");
+    			t7 = text(ctx.store_name);
+    			t8 = space();
+    			if (if_block) if_block.c();
+    			img.src = "https://cdn0.iconfinder.com/data/icons/fatcow/32/card_chip_gold.png";
+    			set_style(img, "width", "32px");
+    			set_style(img, "height", "32px");
+    			img.alt = "Chip";
+    			add_location(img, file, 74, 6, 2175);
+    			div0.className = "text-center text-2xl font-medium tracking-wide";
+    			add_location(div0, file, 78, 6, 2333);
+    			div1.className = "text-center";
+    			add_location(div1, file, 81, 6, 2434);
+    			add_location(div2, file, 83, 8, 2554);
+    			div3.className = "flex justify-between items-center";
+    			add_location(div3, file, 82, 6, 2498);
+    			div4.className = "absolute inset-0 flex flex-col justify-between p-8";
+    			add_location(div4, file, 73, 4, 2104);
+    			div5.className = "pt-ar relative rounded-lg shadow";
+    			set_style(div5, "background", (ctx.cardType ? ctx.cardTypes[ctx.cardType].background : 'white'));
+    			set_style(div5, "color", (ctx.cardType ? ctx.cardTypes[ctx.cardType].color : '#444'));
+    			add_location(div5, file, 69, 2, 1910);
+    			div6.className = "w-full md:max-w-lg";
+    			add_location(div6, file, 68, 0, 1875);
     		},
 
     		l: function claim(nodes) {
@@ -1152,15 +1280,59 @@ var app = (function () {
     		},
 
     		m: function mount(target, anchor) {
-    			insert(target, div2, anchor);
-    			append(div2, div1);
-    			append(div1, div0);
-    			append(div0, t);
+    			insert(target, div6, anchor);
+    			append(div6, div5);
+    			append(div5, div4);
+    			append(div4, img);
+    			append(div4, t0);
+    			append(div4, div0);
+    			append(div0, t1);
+    			append(div4, t2);
+    			append(div4, div1);
+    			append(div1, t3);
+    			append(div1, t4);
+    			append(div1, t5);
+    			append(div4, t6);
+    			append(div4, div3);
+    			append(div3, div2);
+    			append(div2, t7);
+    			append(div3, t8);
+    			if (if_block) if_block.m(div3, null);
     		},
 
     		p: function update(changed, ctx) {
-    			if (changed.cardType) {
-    				set_data(t, ctx.cardType);
+    			if (changed.store_num) {
+    				set_data(t1, ctx.store_num);
+    			}
+
+    			if (changed.store_month) {
+    				set_data(t3, ctx.store_month);
+    			}
+
+    			if (changed.store_year) {
+    				set_data(t5, ctx.store_year);
+    			}
+
+    			if (changed.store_name) {
+    				set_data(t7, ctx.store_name);
+    			}
+
+    			if (ctx.cardType) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    				} else {
+    					if_block = create_if_block(ctx);
+    					if_block.c();
+    					if_block.m(div3, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+
+    			if (changed.cardType || changed.cardTypes) {
+    				set_style(div5, "background", (ctx.cardType ? ctx.cardTypes[ctx.cardType].background : 'white'));
+    				set_style(div5, "color", (ctx.cardType ? ctx.cardTypes[ctx.cardType].color : '#444'));
     			}
     		},
 
@@ -1169,89 +1341,90 @@ var app = (function () {
 
     		d: function destroy(detaching) {
     			if (detaching) {
-    				detach(div2);
+    				detach(div6);
     			}
+
+    			if (if_block) if_block.d();
     		}
     	};
     }
 
     function instance($$self, $$props, $$invalidate) {
-    	let { number = "", name = "", month = "", year = "", ccv = "" } = $$props;
+    	
+
+      let store_num, store_name, store_month, store_year, store_ccv;
+
+      num.subscribe(val => {
+        $$invalidate('store_num', store_num = val);
+      });
+      name.subscribe(val => {
+        $$invalidate('store_name', store_name = val);
+      });
+      month.subscribe(val => {
+        $$invalidate('store_month', store_month = val);
+      });
+      year.subscribe(val => {
+        $$invalidate('store_year', store_year = val);
+      });
+      ccv.subscribe(val => {
+        $$invalidate('store_ccv', store_ccv = val);
+      });
 
       let cardType;
       let isNumberValid = false;
       let isDateValid = false;
       let isCcvValid = false;
 
-    	const writable_props = ['number', 'name', 'month', 'year', 'ccv'];
-    	Object.keys($$props).forEach(key => {
-    		if (!writable_props.includes(key) && !key.startsWith('$$')) console.warn(`<Card> was created with unknown prop '${key}'`);
-    	});
+      let cardTypes = {
+        visa: {
+          background:
+            "linear-gradient(28deg, rgba(26,55,113,1) 0%, rgba(81,110,153,1) 50%, rgba(26,50,113,1) 100%)",
+          color: "#c4dcff",
+          icon:
+            "https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-08-512.png"
+        },
+        mastercard: {
+          color: "#fff0db",
+          background:
+            "linear-gradient(0deg, rgba(105,83,57,1) 0%, rgba(231,184,116,1) 100%)",
+          icon:
+            "https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-07-512.png"
+        },
+        amex: {
+          background:
+            "linear-gradient(0deg, rgba(145,158,164,1) 0%, rgba(215,224,228,1) 100%)",
+          color: "#3e535e",
+          icon:
+            "https://cdn0.iconfinder.com/data/icons/major-credit-cards-colored/48/JD-05-512.png"
+        }
+      };
 
-    	$$self.$set = $$props => {
-    		if ('number' in $$props) $$invalidate('number', number = $$props.number);
-    		if ('name' in $$props) $$invalidate('name', name = $$props.name);
-    		if ('month' in $$props) $$invalidate('month', month = $$props.month);
-    		if ('year' in $$props) $$invalidate('year', year = $$props.year);
-    		if ('ccv' in $$props) $$invalidate('ccv', ccv = $$props.ccv);
-    	};
-
-    	$$self.$$.update = ($$dirty = { number: 1, ccv: 1, month: 1, year: 1, isNumberValid: 1, isCcvValid: 1, isDateValid: 1 }) => {
-    		if ($$dirty.number || $$dirty.ccv || $$dirty.month || $$dirty.year || $$dirty.isNumberValid || $$dirty.isCcvValid || $$dirty.isDateValid) { {
-            $$invalidate('cardType', cardType = lib$1.fns.cardType(number));
-            $$invalidate('isNumberValid', isNumberValid = lib$1.fns.validateCardNumber(number));
-            $$invalidate('isCcvValid', isCcvValid = lib$1.fns.validateCardCVC(ccv));
-            $$invalidate('isDateValid', isDateValid = lib$1.fns.validateCardExpiry(month, year));
+    	$$self.$$.update = ($$dirty = { store_num: 1, store_ccv: 1, store_month: 1, store_year: 1, isNumberValid: 1, isCcvValid: 1, isDateValid: 1 }) => {
+    		if ($$dirty.store_num || $$dirty.store_ccv || $$dirty.store_month || $$dirty.store_year || $$dirty.isNumberValid || $$dirty.isCcvValid || $$dirty.isDateValid) { {
+            $$invalidate('cardType', cardType = lib$1.fns.cardType(store_num));
+            $$invalidate('isNumberValid', isNumberValid = lib$1.fns.validateCardNumber(store_num));
+            $$invalidate('isCcvValid', isCcvValid = lib$1.fns.validateCardCVC(store_ccv));
+            $$invalidate('isDateValid', isDateValid = lib$1.fns.validateCardExpiry(store_month, store_year));
+            console.log(store_num, store_month, store_year, store_ccv);
+            console.log(isNumberValid, isCcvValid, isDateValid);
+            isValid.set(isNumberValid && isCcvValid && isDateValid);
           } }
     	};
 
-    	return { number, name, month, year, ccv, cardType };
+    	return {
+    		store_num,
+    		store_name,
+    		store_month,
+    		store_year,
+    		cardType,
+    		cardTypes
+    	};
     }
 
     class Card extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance, create_fragment, safe_not_equal, ["number", "name", "month", "year", "ccv"]);
-    	}
-
-    	get number() {
-    		throw new Error("<Card>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set number(value) {
-    		throw new Error("<Card>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get name() {
-    		throw new Error("<Card>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set name(value) {
-    		throw new Error("<Card>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get month() {
-    		throw new Error("<Card>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set month(value) {
-    		throw new Error("<Card>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get year() {
-    		throw new Error("<Card>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set year(value) {
-    		throw new Error("<Card>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get ccv() {
-    		throw new Error("<Card>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set ccv(value) {
-    		throw new Error("<Card>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		init(this, options, instance, create_fragment, safe_not_equal, []);
     	}
     }
 
@@ -1259,12 +1432,38 @@ var app = (function () {
 
     const file$1 = "src/components/Form.svelte";
 
-    function create_fragment$1(ctx) {
-    	var div5, div1, div0, svg, path, t0, h2, t2, div2, label0, t4, input0, t5, div4, label1, t7, div3, input1, t8, input2, t9, input3;
+    // (79:2) {#if isValidCC}
+    function create_if_block$1(ctx) {
+    	var button;
 
     	return {
     		c: function create() {
-    			div5 = element("div");
+    			button = element("button");
+    			button.textContent = "Button";
+    			button.className = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-full mt-6\n      rounded";
+    			add_location(button, file$1, 79, 4, 2895);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, button, anchor);
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(button);
+    			}
+    		}
+    	};
+    }
+
+    function create_fragment$1(ctx) {
+    	var div7, div1, div0, svg, path, t0, h2, t2, div2, label0, t4, input0, t5, div6, label1, t7, div5, div3, input1, t8, div4, input2, t9, input3, t10, input4, t11, dispose;
+
+    	var if_block = (ctx.isValidCC) && create_if_block$1();
+
+    	return {
+    		c: function create() {
+    			div7 = element("div");
     			div1 = element("div");
     			div0 = element("div");
     			svg = svg_element("svg");
@@ -1279,56 +1478,79 @@ var app = (function () {
     			t4 = space();
     			input0 = element("input");
     			t5 = space();
-    			div4 = element("div");
+    			div6 = element("div");
     			label1 = element("label");
     			label1.textContent = "Credit Card info";
     			t7 = space();
+    			div5 = element("div");
     			div3 = element("div");
     			input1 = element("input");
     			t8 = space();
+    			div4 = element("div");
     			input2 = element("input");
     			t9 = space();
     			input3 = element("input");
+    			t10 = space();
+    			input4 = element("input");
+    			t11 = space();
+    			if (if_block) if_block.c();
     			attr(path, "d", "M272.715,286.341H145.518c-12.538,0-22.715,10.179-22.715,22.715\n          s10.177,22.716,22.715,22.716h127.197c12.537,0,22.712-10.18,22.712-22.716S285.252,286.341,272.715,286.341z\n          M31.949,386.284\n          c0,20.079,16.264,36.34,36.34,36.34h363.421c20.078,0,36.34-16.261,36.34-36.34V113.718c0-20.079-16.262-36.343-36.34-36.343H68.29\n          c-20.077,0-36.34,16.264-36.34,36.343V386.284z\n          M97.367,122.802h305.267c11.084,0,19.99,8.909,19.99,19.991v25.438H77.375v-25.438\n          C77.375,131.711,86.28,122.802,97.367,122.802z\n          M77.375,240.914h345.249v116.292c0,11.081-8.906,19.992-19.99,19.992H97.367\n          c-11.086,0-19.991-8.911-19.991-19.992V240.914z");
-    			add_location(path, file$1, 6, 8, 271);
+    			add_location(path, file$1, 14, 8, 431);
     			attr(svg, "class", "w-full fill-current text-indigo-400");
     			attr(svg, "viewBox", "0 0 500 500");
-    			add_location(svg, file$1, 5, 6, 191);
+    			add_location(svg, file$1, 13, 6, 351);
     			div0.className = "w-1/4 border-2 border-indigo-400 px-2 py-2 rounded-full font-bold\n      mr-2";
-    			add_location(div0, file$1, 2, 4, 88);
+    			add_location(div0, file$1, 10, 4, 248);
     			h2.className = "text-lg font-medium text-gray-800";
-    			add_location(h2, file$1, 18, 4, 1007);
+    			add_location(h2, file$1, 26, 4, 1167);
     			div1.className = "flex items-center mb-4";
-    			add_location(div1, file$1, 1, 2, 47);
+    			add_location(div1, file$1, 9, 2, 207);
     			label0.htmlFor = "payment";
     			label0.className = "block text text-gray-700 mb-2";
-    			add_location(label0, file$1, 22, 4, 1118);
+    			add_location(label0, file$1, 30, 4, 1278);
     			attr(input0, "type", "text");
     			input0.className = "w-full flex-1 text-sm bg-gray-200 text-gray-700 rounded p-3\n      focus:outline-none";
     			input0.placeholder = "John Doe";
-    			add_location(input0, file$1, 25, 4, 1214);
+    			add_location(input0, file$1, 33, 4, 1374);
     			div2.className = "mb-4";
-    			add_location(div2, file$1, 21, 2, 1095);
+    			add_location(div2, file$1, 29, 2, 1255);
     			label1.htmlFor = "payment";
     			label1.className = "block text text-gray-700 mb-2";
-    			add_location(label1, file$1, 32, 4, 1391);
+    			add_location(label1, file$1, 41, 4, 1576);
     			attr(input1, "type", "text");
-    			input1.className = "w-5/6 flex-1 text-sm bg-gray-200 text-gray-700 rounded-l p-3\n        focus:outline-none";
+    			input1.className = "w-full flex-1 text-sm bg-gray-200 text-gray-700 pl-3 py-3\n          focus:outline-none rounded-l sm:rounded-b-none sm:rounded-t\n          lg:rounded-r-none lg:rounded-l";
     			input1.placeholder = "Card Number";
-    			add_location(input1, file$1, 36, 6, 1516);
+    			input1.maxLength = "16";
+    			add_location(input1, file$1, 46, 8, 1786);
+    			div3.className = "flex w-1/2 sm:block sm:w-full";
+    			add_location(div3, file$1, 45, 6, 1734);
     			attr(input2, "type", "text");
-    			input2.className = "w-1/6 inline-block text-sm bg-gray-200 text-gray-700 p-3\n        focus:outline-none";
-    			input2.placeholder = "MM / YY";
-    			add_location(input2, file$1, 41, 6, 1690);
+    			input2.className = "w-1/3 block text-sm bg-gray-200 text-gray-700 py-3\n          focus:outline-none sm:pl-3 sm:rounded-bl lg:rounded-none";
+    			input2.placeholder = "MM";
+    			add_location(input2, file$1, 56, 8, 2156);
     			attr(input3, "type", "text");
-    			input3.className = "w-1/6 inline-block text-sm bg-gray-200 text-gray-700 rounded-r\n        p-3 focus:outline-none";
-    			input3.placeholder = "CVC";
-    			add_location(input3, file$1, 46, 6, 1856);
-    			div3.className = "flex";
-    			add_location(div3, file$1, 35, 4, 1491);
-    			add_location(div4, file$1, 31, 2, 1381);
-    			div5.className = "bg-white shadow p-8 rounded-lg";
-    			add_location(div5, file$1, 0, 0, 0);
+    			input3.className = "w-1/3 block text-sm bg-gray-200 text-gray-700 py-3\n          focus:outline-none";
+    			input3.placeholder = "YY";
+    			add_location(input3, file$1, 62, 8, 2389);
+    			attr(input4, "type", "text");
+    			input4.className = "w-1/3 block text-sm bg-gray-200 text-gray-700 py-3 pr-y\n          focus:outline-none rounded-r sm:rounded-br sm:rounded-tr-none\n          lg:rounded-r";
+    			input4.placeholder = "CCV";
+    			add_location(input4, file$1, 68, 8, 2583);
+    			div4.className = "flex w-full lg:w-1/2";
+    			add_location(div4, file$1, 55, 6, 2113);
+    			div5.className = "flex flex-row sm:flex-col lg:flex-row";
+    			add_location(div5, file$1, 44, 4, 1676);
+    			add_location(div6, file$1, 40, 2, 1566);
+    			div7.className = "bg-white shadow p-8 rounded-lg";
+    			add_location(div7, file$1, 8, 0, 160);
+
+    			dispose = [
+    				listen(input0, "input", ctx.input0_input_handler),
+    				listen(input1, "input", ctx.input1_input_handler),
+    				listen(input2, "input", ctx.input2_input_handler),
+    				listen(input3, "input", ctx.input3_input_handler),
+    				listen(input4, "input", ctx.input4_input_handler)
+    			];
     		},
 
     		l: function claim(nodes) {
@@ -1336,46 +1558,142 @@ var app = (function () {
     		},
 
     		m: function mount(target, anchor) {
-    			insert(target, div5, anchor);
-    			append(div5, div1);
+    			insert(target, div7, anchor);
+    			append(div7, div1);
     			append(div1, div0);
     			append(div0, svg);
     			append(svg, path);
     			append(div1, t0);
     			append(div1, h2);
-    			append(div5, t2);
-    			append(div5, div2);
+    			append(div7, t2);
+    			append(div7, div2);
     			append(div2, label0);
     			append(div2, t4);
     			append(div2, input0);
-    			append(div5, t5);
-    			append(div5, div4);
-    			append(div4, label1);
-    			append(div4, t7);
-    			append(div4, div3);
+
+    			input0.value = ctx.$name;
+
+    			append(div7, t5);
+    			append(div7, div6);
+    			append(div6, label1);
+    			append(div6, t7);
+    			append(div6, div5);
+    			append(div5, div3);
     			append(div3, input1);
-    			append(div3, t8);
-    			append(div3, input2);
-    			append(div3, t9);
-    			append(div3, input3);
+
+    			input1.value = ctx.$num;
+
+    			append(div5, t8);
+    			append(div5, div4);
+    			append(div4, input2);
+
+    			input2.value = ctx.$month;
+
+    			append(div4, t9);
+    			append(div4, input3);
+
+    			input3.value = ctx.$year;
+
+    			append(div4, t10);
+    			append(div4, input4);
+
+    			input4.value = ctx.$ccv;
+
+    			append(div7, t11);
+    			if (if_block) if_block.m(div7, null);
     		},
 
-    		p: noop,
+    		p: function update(changed, ctx) {
+    			if (changed.$name && (input0.value !== ctx.$name)) input0.value = ctx.$name;
+    			if (changed.$num && (input1.value !== ctx.$num)) input1.value = ctx.$num;
+    			if (changed.$month && (input2.value !== ctx.$month)) input2.value = ctx.$month;
+    			if (changed.$year && (input3.value !== ctx.$year)) input3.value = ctx.$year;
+    			if (changed.$ccv && (input4.value !== ctx.$ccv)) input4.value = ctx.$ccv;
+
+    			if (ctx.isValidCC) {
+    				if (!if_block) {
+    					if_block = create_if_block$1();
+    					if_block.c();
+    					if_block.m(div7, null);
+    				}
+    			} else if (if_block) {
+    				if_block.d(1);
+    				if_block = null;
+    			}
+    		},
+
     		i: noop,
     		o: noop,
 
     		d: function destroy(detaching) {
     			if (detaching) {
-    				detach(div5);
+    				detach(div7);
     			}
+
+    			if (if_block) if_block.d();
+    			run_all(dispose);
     		}
+    	};
+    }
+
+    function instance$1($$self, $$props, $$invalidate) {
+    	let $name, $num, $month, $year, $ccv;
+
+    	validate_store(name, 'name');
+    	subscribe($$self, name, $$value => { $name = $$value; $$invalidate('$name', $name); });
+    	validate_store(num, 'num');
+    	subscribe($$self, num, $$value => { $num = $$value; $$invalidate('$num', $num); });
+    	validate_store(month, 'month');
+    	subscribe($$self, month, $$value => { $month = $$value; $$invalidate('$month', $month); });
+    	validate_store(year, 'year');
+    	subscribe($$self, year, $$value => { $year = $$value; $$invalidate('$year', $year); });
+    	validate_store(ccv, 'ccv');
+    	subscribe($$self, ccv, $$value => { $ccv = $$value; $$invalidate('$ccv', $ccv); });
+
+    	let isValidCC;
+      isValid.subscribe(val => {
+        $$invalidate('isValidCC', isValidCC = val);
+      });
+
+    	function input0_input_handler() {
+    		name.set(this.value);
+    	}
+
+    	function input1_input_handler() {
+    		num.set(this.value);
+    	}
+
+    	function input2_input_handler() {
+    		month.set(this.value);
+    	}
+
+    	function input3_input_handler() {
+    		year.set(this.value);
+    	}
+
+    	function input4_input_handler() {
+    		ccv.set(this.value);
+    	}
+
+    	return {
+    		isValidCC,
+    		$name,
+    		$num,
+    		$month,
+    		$year,
+    		$ccv,
+    		input0_input_handler,
+    		input1_input_handler,
+    		input2_input_handler,
+    		input3_input_handler,
+    		input4_input_handler
     	};
     }
 
     class Form extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, null, create_fragment$1, safe_not_equal, []);
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, []);
     	}
     }
 
@@ -1384,34 +1702,26 @@ var app = (function () {
     const file$2 = "src/App.svelte";
 
     function create_fragment$2(ctx) {
-    	var div2, div0, t0, input, t1, div1, current, dispose;
+    	var div2, div0, t, div1, current;
 
     	var form = new Form({ $$inline: true });
 
-    	var card = new Card({
-    		props: { number: ctx.num },
-    		$$inline: true
-    	});
+    	var card = new Card({ $$inline: true });
 
     	return {
     		c: function create() {
     			div2 = element("div");
     			div0 = element("div");
     			form.$$.fragment.c();
-    			t0 = space();
-    			input = element("input");
-    			t1 = space();
+    			t = space();
     			div1 = element("div");
     			card.$$.fragment.c();
-    			div0.className = "w-2/5 flex items-center mx-2";
-    			add_location(div0, file$2, 7, 2, 174);
-    			attr(input, "type", "text");
-    			add_location(input, file$2, 10, 2, 241);
-    			div1.className = "w-3/5 flex items-center mx-2";
-    			add_location(div1, file$2, 11, 2, 282);
-    			div2.className = "w-1/2 mx-auto flex h-screen";
+    			div0.className = "w-full sm:w-2/5 md:w-1/2 flex items-center mb-4 sm:mb-0";
+    			add_location(div0, file$2, 9, 2, 267);
+    			div1.className = "w-full sm:w-3/5 md:w-1/2 flex items-center";
+    			add_location(div1, file$2, 12, 2, 361);
+    			div2.className = "sm:bg-red-400 md:bg-blue-400 lg:bg-green-400 xl:bg-indigo-400 flex\n  justify-center h-screen flex-col sm:flex-row px-3";
     			add_location(div2, file$2, 6, 0, 130);
-    			dispose = listen(input, "input", ctx.input_input_handler);
     		},
 
     		l: function claim(nodes) {
@@ -1422,24 +1732,13 @@ var app = (function () {
     			insert(target, div2, anchor);
     			append(div2, div0);
     			mount_component(form, div0, null);
-    			append(div2, t0);
-    			append(div2, input);
-
-    			input.value = ctx.num;
-
-    			append(div2, t1);
+    			append(div2, t);
     			append(div2, div1);
     			mount_component(card, div1, null);
     			current = true;
     		},
 
-    		p: function update(changed, ctx) {
-    			if (changed.num && (input.value !== ctx.num)) input.value = ctx.num;
-
-    			var card_changes = {};
-    			if (changed.num) card_changes.number = ctx.num;
-    			card.$set(card_changes);
-    		},
+    		p: noop,
 
     		i: function intro(local) {
     			if (current) return;
@@ -1464,28 +1763,14 @@ var app = (function () {
     			form.$destroy();
 
     			card.$destroy();
-
-    			dispose();
     		}
     	};
-    }
-
-    function instance$1($$self, $$props, $$invalidate) {
-    	
-      let num = "";
-
-    	function input_input_handler() {
-    		num = this.value;
-    		$$invalidate('num', num);
-    	}
-
-    	return { num, input_input_handler };
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$2, safe_not_equal, []);
+    		init(this, options, null, create_fragment$2, safe_not_equal, []);
     	}
     }
 

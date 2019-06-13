@@ -4,12 +4,13 @@
   let num = "";
 </script>
 
-<div class="w-1/2 mx-auto flex h-screen">
-  <div class="w-2/5 flex items-center mx-2">
+<div
+  class="sm:bg-red-400 md:bg-blue-400 lg:bg-green-400 xl:bg-indigo-400 flex
+  justify-center h-screen flex-col sm:flex-row px-3">
+  <div class="w-full sm:w-2/5 md:w-1/2 flex items-center mb-4 sm:mb-0">
     <Form />
   </div>
-  <input type="text" bind:value={num} />
-  <div class="w-3/5 flex items-center mx-2">
-    <Card number={num} />
+  <div class="w-full sm:w-3/5 md:w-1/2 flex items-center">
+    <Card />
   </div>
 </div>
