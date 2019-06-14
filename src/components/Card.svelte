@@ -48,6 +48,7 @@
 
   $: {
     cardType = Payment.fns.cardType(store_num);
+    console.log(cardType);
   }
   $: ccNum = store_num
     .replace(/[^\dA-Z]/g, "")
@@ -55,28 +56,47 @@
     .trim();
 </script>
 
-<div class="w-full md:max-w-lg flex items-center">
+<style>
+  .cc {
+    background-size: contain;
+    background-blend-mode: multiply;
+    text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+  }
+  .chip {
+    width: 32px;
+    height: 32px;
+  }
+</style>
+
+<div class="test w-full md:max-w-lg flex items-center">
   <div
-    class="pt-ar relative w-full rounded-lg shadow"
-    style="background: {cardType ? cardTypes[cardType].background : 'white'};
-    color: {cardType ? cardTypes[cardType].color : '#444'};">
+    class="cc pt-ar relative w-full rounded-lg shadow"
+    style="background-image:
+    url('http://www.pngmart.com/files/3/World-Map-PNG-Photos.png'), {cardType ? cardTypes[cardType].background : 'linear-gradient(0deg, #e2e8f0 0%, #e2e8f0 100%)'};
+    color: {cardType ? cardTypes[cardType].color : '#444'}; ">
     <div class="absolute inset-0 flex flex-col justify-between p-8">
-      <img
-        src="https://cdn0.iconfinder.com/data/icons/fatcow/32/card_chip_gold.png"
-        style="width: 32px; height: 32px;"
-        alt="Chip" />
-      <div class="text-center text-2xl font-medium tracking-wide">
-         {ccNum}
-      </div>
-      <div class="text-center">{store_month}/{store_year}</div>
       <div class="flex justify-between items-center">
-        <div>{store_name}</div>
+        <img
+          src="https://cdn0.iconfinder.com/data/icons/fatcow/32/card_chip_gold.png"
+          class="chip"
+          alt="Chip" />
         {#if cardType}
           <img
             src={cardTypes[cardType].icon}
             alt={cardType}
             class="w-auto h-16" />
         {/if}
+      </div>
+
+      <div class="test text-center text-2xl font-medium tracking-wide">
+         {ccNum}
+      </div>
+      <div class="flex justify-between items-center">
+        <div>{store_name}</div>
+        <div class="flex items-center">
+          <span class="text-xs text-white mr-1">Good Thru:</span>
+          <span>{store_month}/{store_year}</span>
+        </div>
       </div>
     </div>
   </div>
